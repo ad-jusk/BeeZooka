@@ -1,0 +1,160 @@
+# Define macros (only works in top-level gitattributes files)
+[attr]unity-binary	-text
+[attr]unity-json        eol=lf linguist-language=json
+[attr]unity-yaml        eol=lf linguist-language=yaml
+
+# Text files
+*.txt			eol=lf
+
+# Unity source files
+*.cginc                 text
+*.compute               text linguist-language=hlsl
+*.cs                    text diff=csharp
+*.hlsl                  text linguist-language=hlsl
+*.raytrace              text linguist-language=hlsl
+*.shader                text
+
+# Unity JSON files
+.vsconfig		unity-json
+*.json			unity-json
+*.asmdef                unity-json
+*.asmref                unity-json
+*.index                 unity-json
+*.inputactions          unity-json
+*.shadergraph           unity-json
+*.shadersubgraph        unity-json
+
+# Unity UI Toolkit files
+*.tss                   text diff=css linguist-language=css
+*.uss                   text diff=css linguist-language=css
+*.uxml                  text linguist-language=xml linguist-detectable
+
+# Unity YAML
+*.anim                  unity-yaml
+*.asset                 unity-yaml
+*.brush                 unity-yaml
+*.controller            unity-yaml
+*.flare                 unity-yaml
+*.fontsettings          unity-yaml
+*.giparams              unity-yaml
+*.guiskin               unity-yaml
+*.lighting              unity-yaml
+*.mask                  unity-yaml
+*.mat                   unity-yaml
+*.meta                  unity-yaml
+*.mixer                 unity-yaml
+*.overrideController    unity-yaml
+*.playable              unity-yaml
+*.prefab                unity-yaml
+*.preset                unity-yaml
+*.renderTexture         unity-yaml
+*.scenetemplate         unity-yaml
+*.shadervariants        unity-yaml
+*.signal                unity-yaml
+*.spriteatlas           unity-yaml
+*.spriteatlasv2         unity-yaml
+*.terrainlayer          unity-yaml
+*.unity                 unity-yaml
+
+# "physic" for 3D but "physics" for 2D
+*.physicMaterial        unity-yaml
+*.physicsMaterial2D     unity-yaml
+
+# Exclude third-party plugins from GitHub stats
+Assets/Plugins/**       linguist-vendored
+
+# Unity unity-binary
+*.cubemap               unity-binary
+*.unitypackage          unity-binary
+
+# 3D models
+*.3dm                   unity-binary
+*.3ds                   unity-binary
+*.blend                 unity-binary
+*.c4d                   unity-binary
+*.collada               unity-binary
+*.dae                   unity-binary
+*.dxf                   unity-binary
+*.FBX                   unity-binary
+*.fbx                   unity-binary
+*.jas                   unity-binary
+*.lws                   unity-binary
+*.lxo                   unity-binary
+*.ma                    unity-binary
+*.max                   unity-binary
+*.mb                    unity-binary
+*.obj                   unity-binary
+*.ply                   unity-binary
+*.skp                   unity-binary
+*.stl                   unity-binary
+*.ztl                   unity-binary
+
+# Audio
+*.aif                   unity-binary
+*.aiff                  unity-binary
+*.it                    unity-binary
+*.mod                   unity-binary
+*.mp3                   unity-binary
+*.ogg                   unity-binary
+*.s3m                   unity-binary
+*.wav                   unity-binary
+*.xm                    unity-binary
+
+# Video
+*.asf                   unity-binary
+*.avi                   unity-binary
+*.flv                   unity-binary
+*.mov                   unity-binary
+*.mp4                   unity-binary
+*.mpeg                  unity-binary
+*.mpg                   unity-binary
+*.ogv                   unity-binary
+*.wmv                   unity-binary
+
+# Images
+*.bmp                   unity-binary
+*.exr                   unity-binary
+*.gif                   unity-binary
+*.hdr                   unity-binary
+*.iff                   unity-binary
+*.jpeg                  unity-binary
+*.jpg                   unity-binary
+*.pict                  unity-binary
+*.png                   unity-binary
+*.psd                   unity-binary
+*.tga                   unity-binary
+*.tif                   unity-binary
+*.tiff                  unity-binary
+*.webp                  unity-binary
+
+# Compressed Archive
+*.7z                    unity-binary
+*.bz2                   unity-binary
+*.gz                    unity-binary
+*.rar                   unity-binary
+*.tar                   unity-binary
+*.zip                   unity-binary
+
+# Compiled Dynamic Library
+*.dll                   unity-binary
+*.pdb                   unity-binary
+*.so                    unity-binary
+
+# Fonts
+*.otf                   unity-binary
+*.ttf                   unity-binary
+
+# Executable/Installer
+*.apk                   unity-binary
+*.exe                   unity-binary
+
+# Documents
+*.pdf                   unity-binary
+
+# ETC
+*.a                     unity-binary
+*.reason                unity-binary
+*.rns                   unity-binary
+
+# Spine export file for Unity
+*.skel.bytes            unity-binary
