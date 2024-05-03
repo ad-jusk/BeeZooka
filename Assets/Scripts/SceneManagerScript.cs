@@ -3,7 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagerScript : MonoBehaviour
 {
-    public void LoadScene(string sceneName) {
+    public static void LoadScene(string sceneName) {
         SceneManager.LoadScene(sceneName);
+    }
+
+    public static string GetCurrentSceneName() {
+        return SceneManager.GetActiveScene().name;
     }
 }
