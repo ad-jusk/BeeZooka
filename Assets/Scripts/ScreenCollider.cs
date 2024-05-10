@@ -34,7 +34,13 @@ public class ScreenCollider : MonoBehaviour
         Rigidbody2D collidingRB = collision.transform.GetComponent<Rigidbody2D>();
         ContactPoint2D[] contactPoints = new ContactPoint2D[1];
         collision.GetContacts(contactPoints);
-        // TODO: STOP THE RIGID BODY WHEN TOP EDGE IS HIT
-        collidingRB.AddForce(Vector3.Reflect(collision.relativeVelocity, contactPoints[0].normal) * bounceForce);
+
+        bool topEdgeHit = contactPoints[0].normal.Equals(Vector2.up);
+
+        if(topEdgeHit) {
+            collidingRB.velocity = Vector2.zero;
+        } else {
+            collidingRB.AddForce(Vector3.Reflect(collision.relativeVelocity, contactPoints[0].normal) * bounceForce);
+        }
     }
 }
