@@ -8,10 +8,12 @@ public class ScreenCollider : MonoBehaviour
 
     private EdgeCollider2D edgeCollider;
     private Camera mainCamera;
+    private GameEventsManager gameEventsManager;
 
     private void Awake() {
         edgeCollider = GetComponent<EdgeCollider2D>();
         mainCamera = Camera.main;
+        gameEventsManager = GameEventsManager.Instance;
         CreateEdgeCollider();
     }
 
@@ -38,7 +40,7 @@ public class ScreenCollider : MonoBehaviour
         bool topEdgeHit = contactPoints[0].normal.Equals(Vector2.up);
 
         if(topEdgeHit) {
-            collidingRB.velocity = Vector2.zero;
+            gameEventsManager.NotifyNextLevel();
         } else {
             collidingRB.AddForce(Vector3.Reflect(collision.relativeVelocity, contactPoints[0].normal) * bounceForce);
         }
