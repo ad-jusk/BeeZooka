@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4dca468cf995d41b2bc323b97a8959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceForce: 40
+  bounceForce: 30
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,7 +668,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimumSwipeDistance: 1
   maximumSwipeTime: 1
-  swipeStrength: 270
+  swipeStrength: 450
   startPosition: {x: 0, y: -3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

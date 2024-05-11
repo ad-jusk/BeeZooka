@@ -40,8 +40,9 @@ public class PlantSwipeHandler : Singleton<PlantSwipeHandler>
         float swipeDistance = Vector3.Distance(startPosition, endPosition);
         bool distanceOk = swipeDistance >= minimumSwipeDistance;
         bool timeOk = (endTime - startTime) <= maximumSwipeTime;
+        bool plantNotInMotion = rigidBody.velocity.Equals(Vector2.zero);
 
-        if(distanceOk && timeOk) {
+        if(distanceOk && timeOk && plantNotInMotion) {
             Vector3 direction3D = endPosition - startPosition;
             Vector2 direction2D = (Vector2)direction3D.normalized;
             MovePlant(direction2D, swipeDistance);

@@ -7,7 +7,7 @@ public class Plant : MonoBehaviour
     [SerializeField]
     private float maximumSwipeTime = 1f;
     [SerializeField]
-    private float swipeStrength = 270f;
+    private float swipeStrength = 450f;
     [SerializeField]
     private Vector2 startPosition = new(0, -3);
 
