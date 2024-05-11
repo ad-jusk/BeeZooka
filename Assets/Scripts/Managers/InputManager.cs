@@ -12,6 +12,9 @@ public class InputManager : Singleton<InputManager>
     public delegate void EndTouch(Vector2 position, float time);
     public event EndTouch OnEndTouch;
 
+    public delegate void EscapePressed();
+    public event EscapePressed OnEscapePressed;
+
     #endregion
 
     private TouchControls touchControls;
@@ -33,6 +36,7 @@ public class InputManager : Singleton<InputManager>
     private void Start() {
         touchControls.Touch.PrimaryContact.started += ctx => StartTouchPrimary(ctx);
         touchControls.Touch.PrimaryContact.canceled += ctx => EndTouchPrimary(ctx);
+        touchControls.Touch.EscapeKeyPressed.performed += ctx => HandleEscapePressed(ctx);
     }
 
     private void StartTouchPrimary(InputAction.CallbackContext ctx) {
@@ -41,5 +45,9 @@ public class InputManager : Singleton<InputManager>
 
     private void EndTouchPrimary(InputAction.CallbackContext ctx) {
         OnEndTouch?.Invoke(CameraUtils.ScreenToWorld(mainCamera, touchControls.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)ctx.time);
+    }
+
+    private void HandleEscapePressed(InputAction.CallbackContext ctx) {
+        OnEscapePressed?.Invoke();
     }
 }

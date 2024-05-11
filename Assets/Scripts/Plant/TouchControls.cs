@@ -44,6 +44,15 @@ public partial class @TouchControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EscapeKeyPressed"",
+                    ""type"": ""Button"",
+                    ""id"": ""e85bbdc9-56a5-4eeb-bed4-357ce0b2a6f8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -68,6 +77,17 @@ public partial class @TouchControls: IInputActionCollection2, IDisposable
                     ""action"": ""PrimaryPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c424622-6c72-46da-8546-53ef166b507d"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EscapeKeyPressed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -78,6 +98,7 @@ public partial class @TouchControls: IInputActionCollection2, IDisposable
         m_Touch = asset.FindActionMap("Touch", throwIfNotFound: true);
         m_Touch_PrimaryContact = m_Touch.FindAction("PrimaryContact", throwIfNotFound: true);
         m_Touch_PrimaryPosition = m_Touch.FindAction("PrimaryPosition", throwIfNotFound: true);
+        m_Touch_EscapeKeyPressed = m_Touch.FindAction("EscapeKeyPressed", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -141,12 +162,14 @@ public partial class @TouchControls: IInputActionCollection2, IDisposable
     private List<ITouchActions> m_TouchActionsCallbackInterfaces = new List<ITouchActions>();
     private readonly InputAction m_Touch_PrimaryContact;
     private readonly InputAction m_Touch_PrimaryPosition;
+    private readonly InputAction m_Touch_EscapeKeyPressed;
     public struct TouchActions
     {
         private @TouchControls m_Wrapper;
         public TouchActions(@TouchControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @PrimaryContact => m_Wrapper.m_Touch_PrimaryContact;
         public InputAction @PrimaryPosition => m_Wrapper.m_Touch_PrimaryPosition;
+        public InputAction @EscapeKeyPressed => m_Wrapper.m_Touch_EscapeKeyPressed;
         public InputActionMap Get() { return m_Wrapper.m_Touch; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -162,6 +185,9 @@ public partial class @TouchControls: IInputActionCollection2, IDisposable
             @PrimaryPosition.started += instance.OnPrimaryPosition;
             @PrimaryPosition.performed += instance.OnPrimaryPosition;
             @PrimaryPosition.canceled += instance.OnPrimaryPosition;
+            @EscapeKeyPressed.started += instance.OnEscapeKeyPressed;
+            @EscapeKeyPressed.performed += instance.OnEscapeKeyPressed;
+            @EscapeKeyPressed.canceled += instance.OnEscapeKeyPressed;
         }
 
         private void UnregisterCallbacks(ITouchActions instance)
@@ -172,6 +198,9 @@ public partial class @TouchControls: IInputActionCollection2, IDisposable
             @PrimaryPosition.started -= instance.OnPrimaryPosition;
             @PrimaryPosition.performed -= instance.OnPrimaryPosition;
             @PrimaryPosition.canceled -= instance.OnPrimaryPosition;
+            @EscapeKeyPressed.started -= instance.OnEscapeKeyPressed;
+            @EscapeKeyPressed.performed -= instance.OnEscapeKeyPressed;
+            @EscapeKeyPressed.canceled -= instance.OnEscapeKeyPressed;
         }
 
         public void RemoveCallbacks(ITouchActions instance)
@@ -193,5 +222,6 @@ public partial class @TouchControls: IInputActionCollection2, IDisposable
     {
         void OnPrimaryContact(InputAction.CallbackContext context);
         void OnPrimaryPosition(InputAction.CallbackContext context);
+        void OnEscapeKeyPressed(InputAction.CallbackContext context);
     }
 }
