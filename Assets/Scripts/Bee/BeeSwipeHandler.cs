@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlantSwipeHandler : Singleton<PlantSwipeHandler>
+public class BeeSwipeHandler : Singleton<BeeSwipeHandler>
 {
     private float minimumSwipeDistance, maximumSwipeTime, swipeStrength;
 
@@ -50,7 +50,7 @@ public class PlantSwipeHandler : Singleton<PlantSwipeHandler>
     }
 
     /*
-        MOVES PLANT IN GIVEN DIRECTION. SWIPE DISTANCE CAN BE USED TO ADJUST SWIPE FORCE.
+        MOVES BEE IN GIVEN DIRECTION. SWIPE DISTANCE CAN BE USED TO ADJUST SWIPE FORCE.
         FOR NOW THE FORCE IS THE SAME REGARDLESS OF SWIPE DISTANCE
     */
     private void MovePlant(Vector2 direction, float swipeDistance) {

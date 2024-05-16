@@ -8,12 +8,12 @@ public class ScreenCollider : MonoBehaviour
 
     private EdgeCollider2D edgeCollider;
     private Camera mainCamera;
-    private GameEventsManager gameEventsManager;
+    private GameManager gameEventsManager;
 
     private void Awake() {
         edgeCollider = GetComponent<EdgeCollider2D>();
         mainCamera = Camera.main;
-        gameEventsManager = GameEventsManager.Instance;
+        gameEventsManager = GameManager.Instance;
         CreateEdgeCollider();
     }
 
@@ -37,10 +37,11 @@ public class ScreenCollider : MonoBehaviour
         ContactPoint2D[] contactPoints = new ContactPoint2D[1];
         collision.GetContacts(contactPoints);
 
-        bool topEdgeHit = contactPoints[0].normal.Equals(Vector2.up);
+        bool bottomEdgeHit = contactPoints[0].normal.Equals(Vector2.down);
 
-        if(topEdgeHit) {
-            gameEventsManager.NotifyNextLevel();
+        if(bottomEdgeHit) {
+            // HITTING BOTTIM EDGE MEANS THE BEE MISSED THE BEEHIVE
+            gameEventsManager.NotifyBeehiveMissed();
         } else {
             collidingRB.AddForce(Vector3.Reflect(collision.relativeVelocity, contactPoints[0].normal) * bounceForce);
         }
