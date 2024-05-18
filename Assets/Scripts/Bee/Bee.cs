@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Plant : MonoBehaviour
+public class Bee : MonoBehaviour
 {
     [SerializeField]
     private float minimumSwipeDistance = 1f;
@@ -12,18 +12,18 @@ public class Plant : MonoBehaviour
     private Vector2 startPosition = new(0, -3);
 
     private Rigidbody2D rigidBody;
-    private PlantSwipeHandler swipeHandler;
-    private GameEventsManager gameEventsManager;
+    private BeeSwipeHandler swipeHandler;
+    private GameManager gameEventsManager;
 
     private void Awake() {
         rigidBody = GetComponent<Rigidbody2D>();
-        swipeHandler = PlantSwipeHandler.Instance;
-        gameEventsManager = GameEventsManager.Instance;
+        swipeHandler = BeeSwipeHandler.Instance;
+        gameEventsManager = GameManager.Instance;
     }
 
     private void OnEnable() {
         swipeHandler.Initialize(rigidBody, minimumSwipeDistance, maximumSwipeTime, swipeStrength);
-        gameEventsManager.OnNextLevel += ResetPosition;
+        gameEventsManager.OnBeehiveMissed += ResetPosition;
     }
 
     private void OnDisable() {
