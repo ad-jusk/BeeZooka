@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5533280216015398120}
   - component: {fileID: 8686309286335673686}
+  - component: {fileID: 3263297480207403983}
   m_Layer: 0
   m_Name: Buldozer
   m_TagString: Untagged
@@ -146,9 +147,21 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.07, y: 0.06}
   m_Size: {x: 1.8, y: 1.6}
   m_Direction: 1
+--- !u!114 &3263297480207403983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2516822192684925659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3442c1049998f8e4eb551078d634fe37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

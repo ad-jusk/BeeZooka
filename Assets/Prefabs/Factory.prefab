@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8754740398536535339}
   - component: {fileID: 8294879667190095931}
+  - component: {fileID: -2755949851491508836}
   m_Layer: 0
   m_Name: Factory
   m_TagString: Untagged
@@ -62,12 +63,28 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.47}
   m_Size: {x: 9.44, y: 8.63}
   m_Direction: 1
+--- !u!208 &-2755949851491508836
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3101711156374318366}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8122020997832686936
 GameObject:
   m_ObjectHideFlags: 0

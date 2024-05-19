@@ -28,8 +28,17 @@ public class Flower : MonoBehaviour
         if (other.CompareTag("Bee"))
         {
             gameManager.NotifyFlowerEntered(flowerColor);
+            Transform particleTransform = transform.Find("ParticlesPollinated");
+            if (particleTransform != null)
+            {
+                // Get the GameObject component from the Transform
+                GameObject particles = particleTransform.gameObject;
 
-            //Rigidbody2D beeRigidbody = other.GetComponent<Rigidbody2D>();
+                // Activate the GameObject
+                particles.SetActive(true);
+            }
+            //GameObject particles = GameObject.FindGameObjectWithTag("Particle");
+            //particles.SetActive(true);
 
             // Position the bee at the center of the flower
             Rigidbody2D beeRigidbody = other.GetComponent<Rigidbody2D>();

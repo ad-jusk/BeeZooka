@@ -11,6 +11,8 @@ public class GameManager : Singleton<GameManager>
     public event BeehiveEntered OnBeehiveEntered;
     public delegate void BeehiveMissed();
     public event BeehiveMissed OnBeehiveMissed;
+    public delegate void ObstacleEntered();
+    public event ObstacleEntered OnObstacleEntered;
 
     public delegate void FlowerEntered(FlowerColor flowerColor);
     public event FlowerEntered OnFlowerEntered;
@@ -26,7 +28,7 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     private void Awake() {
-        flowersToCollect = new() { FlowerColor.RED, FlowerColor.PURPLE };
+        flowersToCollect = new() { FlowerColor.RED, FlowerColor.PINK };
         collectedFlowers = new();
     }
 
@@ -37,7 +39,10 @@ public class GameManager : Singleton<GameManager>
     public void NotifyBeehiveMissed() {
         OnBeehiveMissed?.Invoke();
     }
-
+    public void NotifyObstacleEntered()
+    {
+        OnObstacleEntered?.Invoke();
+    }
     public void NotifyFlowerEntered(FlowerColor flowerColor) {
         collectedFlowers.Add(flowerColor);
         OnFlowerEntered?.Invoke(flowerColor);
