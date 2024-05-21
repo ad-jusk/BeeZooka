@@ -24,9 +24,7 @@ public class GameManager : Singleton<GameManager>, IDataPersistance
     public delegate void FlowerEntered(FlowerColor flowerColor);
     public event FlowerEntered OnFlowerEntered;
 
-    [SerializeField] public GameObject WinMenu;
-    [SerializeField] private GameObject pauseMenu;
-    [SerializeField] private GameObject lostMenu;
+
     #endregion
     //private GameData gameData;
 
@@ -56,7 +54,6 @@ public class GameManager : Singleton<GameManager>, IDataPersistance
 
     public void NotifyBeehiveMissed() {
         OnBeehiveMissed?.Invoke();
-        lostMenu.SetActive(true);
     }
     public void NotifyObstacleEntered()
     {
@@ -65,20 +62,15 @@ public class GameManager : Singleton<GameManager>, IDataPersistance
     public void NotifyPauseButtonClicked()
     {
         OnPauseButtonClicked?.Invoke();
-        pauseMenu.SetActive(true);
     }
     public void NotifyResumeButtonClicked()
     {
         OnResumeButtonClicked?.Invoke();
-        pauseMenu.SetActive(false);
     }
     public void NotifyRestartButtonClicked()
     {
         OnRestartButtonClicked?.Invoke();
         //LoadData(gameData);
-        lostMenu.SetActive(false);
-        pauseMenu.SetActive(false);
-        WinMenu.SetActive(false);
     }
 
     public void NotifyFlowerEntered(FlowerColor flowerColor) {
