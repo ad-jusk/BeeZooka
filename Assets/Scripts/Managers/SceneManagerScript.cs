@@ -14,9 +14,8 @@ public class SceneManagerScript : Singleton<SceneManagerScript>
     }
     public void QuitGame()
     {
-        #if UNITY_STANDALONE
-                Application.Quit();
-        #endif
+
+        Application.Quit();
 
         #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
