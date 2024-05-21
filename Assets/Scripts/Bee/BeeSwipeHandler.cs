@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class BeeSwipeHandler : Singleton<BeeSwipeHandler>
 {
+    public bool IsSwipeable = false;
+
     [SerializeField]
     private float maximumSwipeStrength = 1000f;
     private float minimumSwipeDistance, maximumSwipeTime, swipeStrength;
@@ -34,7 +36,7 @@ public class BeeSwipeHandler : Singleton<BeeSwipeHandler>
 
     private void SwipeEnd(Vector2 position, float time) {
         endPosition = position;
-        Debug.Log("endPosition: " + startPosition);
+        Debug.Log("endPosition: " + endPosition);
         endTime = time;
         Swipe();
     }
@@ -46,16 +48,17 @@ public class BeeSwipeHandler : Singleton<BeeSwipeHandler>
         bool timeOk = (endTime - startTime) <= maximumSwipeTime;
         bool beeNotInMotion = rigidBody.velocity.Equals(Vector2.zero);
 
-        if(distanceOk && timeOk && beeNotInMotion) {
+        if(IsSwipeable && distanceOk && timeOk && beeNotInMotion) {
 
-            Vector3 startWorldPosition = Camera.main.ScreenToWorldPoint(startPosition);
+/*            Vector3 startWorldPosition = Camera.main.ScreenToWorldPoint(startPosition);
             Vector3 endWorldPosition = Camera.main.ScreenToWorldPoint(endPosition);
 
             Vector3 direction3D = endWorldPosition - startWorldPosition;
             Vector2 direction2D = new Vector2(direction3D.x, direction3D.y).normalized;
-            Debug.Log(direction2D.x + ", " + direction2D.y);
-            //Vector3 direction3D = endPosition - startPosition;
-            //Vector2 direction2D = (Vector2)direction3D.normalized;
+            Debug.Log(direction2D.x + ", " + direction2D.y);*/
+            Vector3 direction3D = endPosition - startPosition;
+            Vector2 direction2D = (Vector2)direction3D.normalized;
+
             MovePlant(direction2D, swipeDistance);
         }
     }

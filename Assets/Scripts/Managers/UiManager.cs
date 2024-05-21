@@ -19,8 +19,9 @@ public class UiManager : Singleton<UiManager>
         gameManager = GameManager.Instance;
         gameManager.OnFlowerEntered += HandleFlowerEntered;
         gameManager.OnBeehiveMissed += HandleOnBeehiveMissed;
+        gameManager.OnObstacleEntered += HandleObstacleEntered;
         gameManager.OnPauseButtonClicked += HandlePauseButtonClicked;
-        gameManager.OnRestartButtonClicked += HandleResumeButtonClicked;
+        gameManager.OnResumeButtonClicked += HandleResumeButtonClicked;
         gameManager.OnRestartButtonClicked += HandleRestartButtonClicked;
     }
 
@@ -48,6 +49,10 @@ public class UiManager : Singleton<UiManager>
         }
     }
     private void HandleOnBeehiveMissed()
+    {
+        lostMenu.SetActive(true);
+    }
+    private void HandleObstacleEntered()
     {
         lostMenu.SetActive(true);
     }

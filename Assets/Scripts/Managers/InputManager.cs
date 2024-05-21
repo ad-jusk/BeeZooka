@@ -39,11 +39,17 @@ public class InputManager : Singleton<InputManager>
         touchControls.Touch.EscapeKeyPressed.performed += ctx => HandleEscapePressed(ctx);
     }
 
-    private void StartTouchPrimary(InputAction.CallbackContext ctx) {
-        OnStartTouch?.Invoke(CameraUtils.ScreenToWorld(mainCamera, touchControls.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)ctx.startTime);
+    /*
+      CHANGES HERE 
+        USING PrimaryContact to get the start position
+     */
+    private void StartTouchPrimary(InputAction.CallbackContext ctx)
+    {
+        OnStartTouch?.Invoke(CameraUtils.ScreenToWorld(mainCamera, touchControls.Touch.PrimaryContact.ReadValue<Vector2>()), (float)ctx.startTime);
     }
 
-    private void EndTouchPrimary(InputAction.CallbackContext ctx) {
+    private void EndTouchPrimary(InputAction.CallbackContext ctx)
+    {
         OnEndTouch?.Invoke(CameraUtils.ScreenToWorld(mainCamera, touchControls.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)ctx.time);
     }
 

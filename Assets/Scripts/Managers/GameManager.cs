@@ -20,6 +20,8 @@ public class GameManager : Singleton<GameManager>, IDataPersistance
     public event ResumeButtonClicked OnResumeButtonClicked;
     public delegate void RestartButtonClicked();
     public event RestartButtonClicked OnRestartButtonClicked;
+    public delegate void NextLevelButtonClicked();
+    public event NextLevelButtonClicked OnNextLevelButtonClicked;
 
     public delegate void FlowerEntered(FlowerColor flowerColor);
     public event FlowerEntered OnFlowerEntered;
@@ -40,10 +42,12 @@ public class GameManager : Singleton<GameManager>, IDataPersistance
         string sceneName = SceneManager.GetActiveScene().name;
         switch (sceneName)
         {
-            case "Level1":
+            case "1":
                 flowersToCollect = new() { FlowerColor.RED, FlowerColor.PINK };
                 break;
-
+            case "2":
+                flowersToCollect = new() { FlowerColor.RED, FlowerColor.PINK, FlowerColor.BLUE };
+                break;
         }
         collectedFlowers = new();
     }
@@ -72,7 +76,11 @@ public class GameManager : Singleton<GameManager>, IDataPersistance
         OnRestartButtonClicked?.Invoke();
         //LoadData(gameData);
     }
-
+    public void NotifyNextLevelButtonClicked()
+    {
+        OnNextLevelButtonClicked?.Invoke();
+        //LoadData(gameData);
+    }
     public void NotifyFlowerEntered(FlowerColor flowerColor) {
         collectedFlowers.Add(flowerColor);
         OnFlowerEntered?.Invoke(flowerColor);

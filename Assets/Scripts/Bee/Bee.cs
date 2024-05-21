@@ -16,18 +16,41 @@ public class Bee : MonoBehaviour
     [SerializeField]
     public Vector2 velocity;
     private BeeSwipeHandler swipeHandler;
-    private GameManager gameEventsManager;
+    private GameManager gameManager;
 
     private void Awake() {
         rigidBody = GetComponent<Rigidbody2D>();
         swipeHandler = BeeSwipeHandler.Instance;
-        gameEventsManager = GameManager.Instance;
+        gameManager = GameManager.Instance;
         ResetPosition();
     }
 
     private void OnEnable() {
         swipeHandler.Initialize(rigidBody, minimumSwipeDistance, maximumSwipeTime, swipeStrength);
-        gameEventsManager.OnBeehiveMissed += ResetPosition;
+        swipeHandler.IsSwipeable = true;
+
+        gameManager.OnBeehiveMissed += HandleOnBeehiveMissed;
+        gameManager.OnObstacleEntered += HandleObstacleEntered;
+        gameManager.OnPauseButtonClicked += HandlePauseButtonClicked;
+        gameManager.OnResumeButtonClicked += HandleResumeButtonClicked;
+    }
+
+
+    private void HandleOnBeehiveMissed()
+    {
+        swipeHandler.IsSwipeable = false;
+    }
+    private void HandleObstacleEntered()
+    {
+        swipeHandler.IsSwipeable = false;
+    }
+    private void HandlePauseButtonClicked()
+    {
+        swipeHandler.IsSwipeable = false;
+    }
+    private void HandleResumeButtonClicked()
+    {
+        swipeHandler.IsSwipeable = true;
     }
 
     private void OnDisable() {
