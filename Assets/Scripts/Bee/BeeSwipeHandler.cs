@@ -28,11 +28,13 @@ public class BeeSwipeHandler : Singleton<BeeSwipeHandler>
 
     private void SwipeStart(Vector2 position, float time) {
         startPosition = position;
+        Debug.Log("startPosition: "+ startPosition);
         startTime = time;
     }
 
     private void SwipeEnd(Vector2 position, float time) {
         endPosition = position;
+        Debug.Log("endPosition: " + startPosition);
         endTime = time;
         Swipe();
     }
@@ -45,10 +47,16 @@ public class BeeSwipeHandler : Singleton<BeeSwipeHandler>
         bool beeNotInMotion = rigidBody.velocity.Equals(Vector2.zero);
 
         if(distanceOk && timeOk && beeNotInMotion) {
-            Vector3 direction3D = endPosition - startPosition;
-            Vector2 direction2D = (Vector2)direction3D.normalized;
+
+            Vector3 startWorldPosition = Camera.main.ScreenToWorldPoint(startPosition);
+            Vector3 endWorldPosition = Camera.main.ScreenToWorldPoint(endPosition);
+
+            Vector3 direction3D = endWorldPosition - startWorldPosition;
+            Vector2 direction2D = new Vector2(direction3D.x, direction3D.y).normalized;
+            Debug.Log(direction2D.x + ", " + direction2D.y);
+            //Vector3 direction3D = endPosition - startPosition;
+            //Vector2 direction2D = (Vector2)direction3D.normalized;
             MovePlant(direction2D, swipeDistance);
-            RotateBee(direction2D);
         }
     }
 
@@ -60,21 +68,11 @@ public class BeeSwipeHandler : Singleton<BeeSwipeHandler>
     */
     private void MovePlant(Vector2 direction, float swipeDistance) {
         float swipeStrengthCalculated = swipeStrength * (swipeDistance / minimumSwipeDistance) ;
-        swipeStrengthCalculated = Mathf.Clamp(swipeStrengthCalculated, 0f, maximumSwipeStrength);
+        //swipeStrengthCalculated = Mathf.Clamp(swipeStrengthCalculated, 0f, maximumSwipeStrength);
         rigidBody.AddForce(swipeStrengthCalculated * direction);
     }
 
-    /*
-    ROTATES THE BEE IN THE DIRECTION OF THE SWIPE
-    */
-    private void RotateBee(Vector2 direction)
-    {
-        if (direction.magnitude > 0.1f) // Check if velocity magnitude is significant
-        {
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            rigidBody.rotation = angle - 90;
-        }
-    }
+
     public void Dispose() {
         inputManager.OnStartTouch -= SwipeStart;
         inputManager.OnEndTouch -= SwipeEnd;

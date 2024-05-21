@@ -35,6 +35,7 @@ public class UiManager : MonoBehaviour
             Debug.LogError($"Child GameObject with the name '{flowerColor.ToString()}' not found under the canvas.");
         }
     }
+
     private void ChangeText(string text, string type)
     {
 

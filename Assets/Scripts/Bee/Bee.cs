@@ -13,6 +13,8 @@ public class Bee : MonoBehaviour
     private Vector2 startPosition = new(0, -3);
 
     private Rigidbody2D rigidBody;
+    [SerializeField]
+    public Vector2 velocity;
     private BeeSwipeHandler swipeHandler;
     private GameManager gameEventsManager;
 
@@ -34,10 +36,16 @@ public class Bee : MonoBehaviour
     private void FixedUpdate()
     {
         // so far rotating it in fixedupdate works best. Tried rotating on collision but it didn't work well
-        if (rigidBody.velocity != Vector2.zero)
+        velocity = rigidBody.velocity;
+        if (rigidBody.velocity.magnitude > 0.1f)
+        {
             RotateBee(rigidBody.velocity);
+        }
         else
-            ResetRotation();
+        {
+            rigidBody.angularVelocity = 0f; // Reset angular velocity
+        }
+
     }
 
     private void ResetPosition() {
@@ -50,7 +58,7 @@ public class Bee : MonoBehaviour
     {
         rigidBody.rotation = 0;
         transform.rotation = Quaternion.Euler(0, 0, 0);
-        RotateBee(Vector2.zero);
+        rigidBody.angularVelocity = 0f; 
     }
 
     private void RotateBee(Vector2 direction)

@@ -46,8 +46,8 @@ public class Flower : MonoBehaviour
             beeRigidbody.velocity = Vector2.zero;
             beeRigidbody.position = transform.GetComponent<Renderer>().bounds.center;
 
-            beeRigidbody.rotation = 0;
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            //beeRigidbody.rotation = 0;
+            //transform.rotation = Quaternion.Euler(0, 0, 0);
 
         }
     }
