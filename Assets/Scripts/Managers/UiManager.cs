@@ -10,6 +10,9 @@ using static System.Net.Mime.MediaTypeNames;
 public class UiManager : Singleton<UiManager>
 {
     private GameManager gameManager;
+    private InputManager inputManager;
+    private AudioManager audioManager;
+
     [SerializeField] public GameObject WinMenu;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject lostMenu;
@@ -17,12 +20,17 @@ public class UiManager : Singleton<UiManager>
     private void Awake()
     {
         gameManager = GameManager.Instance;
+        inputManager = InputManager.Instance;
+        audioManager = AudioManager.Instance;
+
         gameManager.OnFlowerEntered += HandleFlowerEntered;
         gameManager.OnBeehiveMissed += HandleOnBeehiveMissed;
         gameManager.OnObstacleEntered += HandleObstacleEntered;
         gameManager.OnPauseButtonClicked += HandlePauseButtonClicked;
         gameManager.OnResumeButtonClicked += HandleResumeButtonClicked;
         gameManager.OnRestartButtonClicked += HandleRestartButtonClicked;
+
+        inputManager.OnEscapePressed  += HandlePauseButtonClicked;
     }
 
     private void HandleFlowerEntered(FlowerColor flowerColor)
@@ -51,10 +59,14 @@ public class UiManager : Singleton<UiManager>
     private void HandleOnBeehiveMissed()
     {
         lostMenu.SetActive(true);
+        audioManager.StopMusic();
+        PlaySFX(0);
     }
     private void HandleObstacleEntered()
     {
         lostMenu.SetActive(true);
+        audioManager.StopMusic();
+        PlaySFX(0);
     }
     private void HandlePauseButtonClicked()
     {
@@ -69,10 +81,23 @@ public class UiManager : Singleton<UiManager>
         lostMenu.SetActive(false);
         pauseMenu.SetActive(false);
         WinMenu.SetActive(false);
+        audioManager.PlayMusic();
     }
 
-    private void ChangeText(string text, string type)
+    private void PlaySFX(int type)
     {
-
+        if (audioManager != null)
+        {
+            switch (type)
+            {
+                case 0:
+                    audioManager.PlaySFX(audioManager.gameOverClip);
+                    break;
+            }
+        }
+        else
+        {
+            Debug.LogError("AudioManager instance not found");
+        }
     }
 }

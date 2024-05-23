@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [DefaultExecutionOrder(-1)]
-public class GameManager : Singleton<GameManager>, IDataPersistance
+public class GameManager : Singleton<GameManager>
 {
     #region GameEvents
 
@@ -113,13 +113,4 @@ public class GameManager : Singleton<GameManager>, IDataPersistance
         return itemCounts.Values.All(c => c == 0);
     }
 
-    public void LoadData(GameData data)
-    {
-        Debug.Log("Load data");
-    }
-
-    public void SaveData(ref GameData data)
-    {
-        Debug.Log("Save data");
-    }
 }

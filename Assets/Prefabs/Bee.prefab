@@ -592,7 +592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimumSwipeDistance: 1
   maximumSwipeTime: 1
-  swipeStrength: 450
+  swipeStrength: 230
   startPosition: {x: 0, y: -3}
   velocity: {x: 0, y: 0}
 --- !u!95 &7186978724190989035
