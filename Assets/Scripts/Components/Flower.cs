@@ -37,18 +37,12 @@ public class Flower : MonoBehaviour
                 // Activate the GameObject
                 particles.SetActive(true);
             }
-            //GameObject particles = GameObject.FindGameObjectWithTag("Particle");
-            //particles.SetActive(true);
 
             // Position the bee at the center of the flower
             Rigidbody2D beeRigidbody = other.GetComponent<Rigidbody2D>();
 
             beeRigidbody.velocity = Vector2.zero;
             beeRigidbody.position = transform.GetComponent<Renderer>().bounds.center;
-
-            //beeRigidbody.rotation = 0;
-            //transform.rotation = Quaternion.Euler(0, 0, 0);
-
         }
     }
 

@@ -50,12 +50,6 @@ public class BeeSwipeHandler : Singleton<BeeSwipeHandler>
 
         if(IsSwipeable && distanceOk && timeOk && beeNotInMotion) {
 
-/*            Vector3 startWorldPosition = Camera.main.ScreenToWorldPoint(startPosition);
-            Vector3 endWorldPosition = Camera.main.ScreenToWorldPoint(endPosition);
-
-            Vector3 direction3D = endWorldPosition - startWorldPosition;
-            Vector2 direction2D = new Vector2(direction3D.x, direction3D.y).normalized;
-            Debug.Log(direction2D.x + ", " + direction2D.y);*/
             Vector3 direction3D = endPosition - startPosition;
             Vector2 direction2D = (Vector2)direction3D.normalized;
 
@@ -70,9 +64,9 @@ public class BeeSwipeHandler : Singleton<BeeSwipeHandler>
         FOR NOW THE FORCE IS THE SAME REGARDLESS OF SWIPE DISTANCE
     */
     private void MovePlant(Vector2 direction, float swipeDistance) {
-        float swipeStrengthCalculated = swipeStrength * (swipeDistance / minimumSwipeDistance) ;
+        //float swipeStrengthCalculated = swipeStrength * (swipeDistance / minimumSwipeDistance) ;
         //swipeStrengthCalculated = Mathf.Clamp(swipeStrengthCalculated, 0f, maximumSwipeStrength);
-        rigidBody.AddForce(swipeStrengthCalculated * direction);
+        rigidBody.AddForce(swipeStrength * direction);
     }
 
 

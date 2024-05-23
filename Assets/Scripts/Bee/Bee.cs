@@ -22,12 +22,12 @@ public class Bee : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         swipeHandler = BeeSwipeHandler.Instance;
         gameManager = GameManager.Instance;
+        SetSpriteSwipeable(true);
         ResetPosition();
     }
 
     private void OnEnable() {
         swipeHandler.Initialize(rigidBody, minimumSwipeDistance, maximumSwipeTime, swipeStrength);
-        swipeHandler.IsSwipeable = true;
 
         gameManager.OnBeehiveMissed += HandleOnBeehiveMissed;
         gameManager.OnObstacleEntered += HandleObstacleEntered;
@@ -35,22 +35,24 @@ public class Bee : MonoBehaviour
         gameManager.OnResumeButtonClicked += HandleResumeButtonClicked;
     }
 
-
+    private void SetSpriteSwipeable(bool isSwipeable) {
+        swipeHandler.IsSwipeable = isSwipeable;
+    }
     private void HandleOnBeehiveMissed()
     {
-        swipeHandler.IsSwipeable = false;
+        SetSpriteSwipeable(false);
     }
     private void HandleObstacleEntered()
     {
-        swipeHandler.IsSwipeable = false;
+        SetSpriteSwipeable(false);
     }
     private void HandlePauseButtonClicked()
     {
-        swipeHandler.IsSwipeable = false;
+        SetSpriteSwipeable(false);
     }
     private void HandleResumeButtonClicked()
     {
-        swipeHandler.IsSwipeable = true;
+        SetSpriteSwipeable(true);
     }
 
     private void OnDisable() {
