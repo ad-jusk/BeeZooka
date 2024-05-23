@@ -16,22 +16,43 @@ public class Flower : MonoBehaviour
         gameManager = GameManager.Instance;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-
-        if(flowerState == FlowerState.INACTIVE) {
+    // Using OnTriggerEnter2D instead of OnCollisionEnter2D for entering flower
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (flowerState == FlowerState.INACTIVE)
+        {
             Debug.Log("Inactive flower hit - ignoring collision");
             return;
         }
 
-        gameManager.NotifyFlowerEntered(flowerColor);
+        if (other.CompareTag("Bee"))
+        {
+            gameManager.NotifyFlowerEntered(flowerColor);
+            Transform particleTransform = transform.Find("ParticlesPollinated");
+            if (particleTransform != null)
+            {
+                // Get the GameObject component from the Transform
+                GameObject particles = particleTransform.gameObject;
 
-        Rigidbody2D beeRigidbody = collision.transform.GetComponent<Rigidbody2D>();
-        beeRigidbody.velocity = Vector2.zero;
-        beeRigidbody.position = transform.GetComponent<Renderer>().bounds.center;
+                // Activate the GameObject
+                particles.SetActive(true);
+            }
+
+            // Position the bee at the center of the flower
+            Rigidbody2D beeRigidbody = other.GetComponent<Rigidbody2D>();
+
+            beeRigidbody.velocity = Vector2.zero;
+            beeRigidbody.position = transform.GetComponent<Renderer>().bounds.center;
+        }
     }
 
-    private void OnCollisionExit2D(Collision2D collision) {
-        SetFlowerInactive();
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        // If the bee exits the flower collider trigger, set the flower inactive
+        if (other.CompareTag("Bee"))
+        {
+            SetFlowerInactive();
+        }
     }
 
     private void SetFlowerInactive() {
