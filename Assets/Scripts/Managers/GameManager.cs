@@ -26,7 +26,6 @@ public class GameManager : Singleton<GameManager>
     public delegate void FlowerEntered(FlowerColor flowerColor);
     public event FlowerEntered OnFlowerEntered;
 
-
     #endregion
     //private GameData gameData;
 
@@ -38,7 +37,8 @@ public class GameManager : Singleton<GameManager>
 
     #endregion
 
-    private void Awake() {
+    private void Awake()
+    {
         string sceneName = SceneManager.GetActiveScene().name;
         switch (sceneName)
         {
@@ -52,65 +52,81 @@ public class GameManager : Singleton<GameManager>
         collectedFlowers = new();
     }
 
-    public void NotifyBeehiveEntered() {
+    public void NotifyBeehiveEntered()
+    {
         OnBeehiveEntered?.Invoke();
     }
 
-    public void NotifyBeehiveMissed() {
+    public void NotifyBeehiveMissed()
+    {
         OnBeehiveMissed?.Invoke();
     }
+
     public void NotifyObstacleEntered()
     {
         OnObstacleEntered?.Invoke();
     }
+
     public void NotifyPauseButtonClicked()
     {
         OnPauseButtonClicked?.Invoke();
     }
+
     public void NotifyResumeButtonClicked()
     {
         OnResumeButtonClicked?.Invoke();
     }
+
     public void NotifyRestartButtonClicked()
     {
         OnRestartButtonClicked?.Invoke();
         //LoadData(gameData);
     }
+
     public void NotifyNextLevelButtonClicked()
     {
         OnNextLevelButtonClicked?.Invoke();
         //LoadData(gameData);
     }
-    public void NotifyFlowerEntered(FlowerColor flowerColor) {
+
+    public void NotifyFlowerEntered(FlowerColor flowerColor)
+    {
         collectedFlowers.Add(flowerColor);
         OnFlowerEntered?.Invoke(flowerColor);
     }
 
-    public bool AllFlowersCollected() {
-
-        if (flowersToCollect.Count != collectedFlowers.Count){
+    public bool AllFlowersCollected()
+    {
+        if (flowersToCollect.Count != collectedFlowers.Count)
+        {
             return false;
         }
 
         var itemCounts = new Dictionary<FlowerColor, int>();
 
-        foreach (FlowerColor s in flowersToCollect) {
-            if (itemCounts.ContainsKey(s)) {
+        foreach (FlowerColor s in flowersToCollect)
+        {
+            if (itemCounts.ContainsKey(s))
+            {
                 itemCounts[s]++;
-            } else {
+            }
+            else
+            {
                 itemCounts.Add(s, 1);
             }
         }
 
-        foreach (FlowerColor s in collectedFlowers) {
-            if (itemCounts.ContainsKey(s)) {
+        foreach (FlowerColor s in collectedFlowers)
+        {
+            if (itemCounts.ContainsKey(s))
+            {
                 itemCounts[s]--;
             }
-            else {
+            else
+            {
                 return false;
             }
         }
         return itemCounts.Values.All(c => c == 0);
     }
-
 }

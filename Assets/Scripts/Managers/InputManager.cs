@@ -20,27 +20,31 @@ public class InputManager : Singleton<InputManager>
     private TouchControls touchControls;
     private Camera mainCamera;
 
-    private void Awake() {
+    private void Awake()
+    {
         touchControls = new TouchControls();
         mainCamera = Camera.main;
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         touchControls.Enable();
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         touchControls.Disable();
     }
 
-    private void Start() {
+    private void Start()
+    {
         touchControls.Touch.PrimaryContact.started += ctx => StartTouchPrimary(ctx);
         touchControls.Touch.PrimaryContact.canceled += ctx => EndTouchPrimary(ctx);
         touchControls.Touch.EscapeKeyPressed.performed += ctx => HandleEscapePressed(ctx);
     }
 
     /*
-      CHANGES HERE 
+      CHANGES HERE
         USING PrimaryContact to get the start position
      */
     private void StartTouchPrimary(InputAction.CallbackContext ctx)
@@ -53,7 +57,8 @@ public class InputManager : Singleton<InputManager>
         OnEndTouch?.Invoke(CameraUtils.ScreenToWorld(mainCamera, touchControls.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)ctx.time);
     }
 
-    private void HandleEscapePressed(InputAction.CallbackContext ctx) {
+    private void HandleEscapePressed(InputAction.CallbackContext ctx)
+    {
         OnEscapePressed?.Invoke();
     }
 }

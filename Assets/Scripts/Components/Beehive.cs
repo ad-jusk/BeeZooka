@@ -5,12 +5,14 @@ public class Beehive : MonoBehaviour
     private GameManager gameManager;
     private UiManager uiManager;
 
-    private void Awake() {
+    private void Awake()
+    {
         gameManager = GameManager.Instance;
         uiManager = UiManager.Instance;
     }
 
-    private void OnTriggerEnter2D(Collider2D other){
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         Debug.Log(gameManager.AllFlowersCollected() ? "LEVEL CLEARED" : "LEVEL FAILED");
         if (gameManager.AllFlowersCollected())
         {

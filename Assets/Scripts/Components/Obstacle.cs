@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
     private GameManager gameManager;
     private AudioManager audioManager;
+
     private void Awake()
     {
         gameManager = GameManager.Instance;
         audioManager = AudioManager.Instance;
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Bee"))
@@ -30,8 +27,6 @@ public class Obstacle : MonoBehaviour
 
             beeRigidbody.rotation = 0;
             transform.rotation = Quaternion.Euler(0, 0, 0);
-
         }
     }
-
 }

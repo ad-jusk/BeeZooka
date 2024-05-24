@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class Flower : MonoBehaviour
 {
-    private enum FlowerState {
-        ACTIVE, INACTIVE
+    private enum FlowerState
+    {
+        ACTIVE,
+        INACTIVE
     };
 
     [SerializeField]
@@ -13,7 +15,8 @@ public class Flower : MonoBehaviour
     private GameManager gameManager;
     private AudioManager audioManager;
 
-    private void Awake() {
+    private void Awake()
+    {
         gameManager = GameManager.Instance;
         audioManager = AudioManager.Instance;
     }
@@ -57,7 +60,8 @@ public class Flower : MonoBehaviour
         }
     }
 
-    private void SetFlowerInactive() {
+    private void SetFlowerInactive()
+    {
         flowerState = FlowerState.INACTIVE;
         // ALSO DISABLE COLLIDER
         GetComponent<Collider2D>().enabled = false;

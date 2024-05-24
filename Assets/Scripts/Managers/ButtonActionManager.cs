@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 [DefaultExecutionOrder(-1)]
-
 public class ButtonActionManager : MonoBehaviour
 {
     private AudioManager audioManager;
@@ -25,6 +21,7 @@ public class ButtonActionManager : MonoBehaviour
             Debug.LogError("AudioManager instance not found");
         }
     }
+
     public void SetMusicEnabled(bool enabled)
     {
         if (audioManager != null)
@@ -32,6 +29,7 @@ public class ButtonActionManager : MonoBehaviour
             audioManager.SetMusicEnabled(enabled);
         }
     }
+
     public void SetSFXEnabled(bool enabled)
     {
         if (audioManager != null)
@@ -39,5 +37,4 @@ public class ButtonActionManager : MonoBehaviour
             audioManager.SetSFXEnabled(enabled);
         }
     }
-
 }

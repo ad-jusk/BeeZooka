@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DefaultExecutionOrder(-2)]
-
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
-    [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioSource SFXSource;
+
+    [SerializeField]
+    AudioSource audioSource;
+
+    [SerializeField]
+    AudioSource SFXSource;
 
     [Header("Clips")]
     public AudioClip backgroundMusicClip;
@@ -18,8 +21,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip obstacleHitClip;
 
     private List<AudioSource> audioSources = new List<AudioSource>();
-    private float masterVolumeMusic = 1.0f; 
-    private float masterVolumeSfx= 0.7f;
+    private float masterVolumeMusic = 1.0f;
+    private float masterVolumeSfx = 0.7f;
 
     private void Awake()
     {
@@ -41,6 +44,7 @@ public class AudioManager : MonoBehaviour
         audioSource.clip = backgroundMusicClip;
         PlayMusic();
     }
+
     public void PlayMusic()
     {
         if (audioSource != null)
@@ -52,6 +56,7 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("audioSource or audioClip is null.");
         }
     }
+
     public void StopMusic()
     {
         if (audioSource != null)
@@ -63,6 +68,7 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("audioSource or audioClip is null.");
         }
     }
+
     public void PlaySFX(AudioClip audioClip)
     {
         if (SFXSource != null && audioClip != null)
@@ -86,6 +92,7 @@ public class AudioManager : MonoBehaviour
             audioSource.volume = 0f;
         }
     }
+
     public void SetSFXEnabled(bool enabled)
     {
         if (enabled)
@@ -110,5 +117,4 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("AudioSource is null or already registered.");
         }
     }
-
 }
