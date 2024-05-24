@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-2)]
+
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
@@ -33,6 +35,7 @@ public class AudioManager : MonoBehaviour
         RegisterAudioSource(audioSource, masterVolumeMusic);
         RegisterAudioSource(SFXSource, masterVolumeSfx);
     }
+
     private void OnEnable()
     {
         audioSource.clip = backgroundMusicClip;
@@ -72,23 +75,27 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void MuteMusic()
+    public void SetMusicEnabled(bool enabled)
     {
-        audioSource.volume = 0f;
+        if (enabled)
+        {
+            audioSource.volume = masterVolumeMusic;
+        }
+        else
+        {
+            audioSource.volume = 0f;
+        }
     }
-    public void MuteSFX()
+    public void SetSFXEnabled(bool enabled)
     {
-        SFXSource.volume = 0f;
-    }
-
-    public void UnmuteMusic()
-    {
-        audioSource.volume = masterVolumeMusic;
-    }
-
-    public void UnmuteSFX()
-    {
-        SFXSource.volume = masterVolumeSfx;
+        if (enabled)
+        {
+            SFXSource.volume = masterVolumeSfx;
+        }
+        else
+        {
+            SFXSource.volume = 0f;
+        }
     }
 
     private void RegisterAudioSource(AudioSource source, float masterVolume)
