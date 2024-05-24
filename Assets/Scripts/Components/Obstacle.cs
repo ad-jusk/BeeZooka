@@ -8,15 +8,19 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour
 {
     private GameManager gameManager;
+    private AudioManager audioManager;
     private void Awake()
     {
         gameManager = GameManager.Instance;
+        audioManager = AudioManager.Instance;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Bee"))
         {
             gameManager.NotifyObstacleEntered();
+            audioManager.PlaySFX(audioManager.obstacleHitClip);
+
             Debug.Log("Obstacle hti");
 
             // Position the bee at the center of the flower

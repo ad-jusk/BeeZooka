@@ -5,7 +5,6 @@ public class BeeSwipeHandler : Singleton<BeeSwipeHandler>
     public bool IsSwipeable = false;
 
     [SerializeField]
-    private float maximumSwipeStrength = 1000f;
     private float minimumSwipeDistance, maximumSwipeTime, swipeStrength;
 
     private Vector2 startPosition, endPosition;
@@ -58,8 +57,6 @@ public class BeeSwipeHandler : Singleton<BeeSwipeHandler>
     }
 
     /*
-    --> NEW  started doing this, not sure if it works fine with mouse
-
         MOVES BEE IN GIVEN DIRECTION. SWIPE DISTANCE CAN BE USED TO ADJUST SWIPE FORCE.
         FOR NOW THE FORCE IS THE SAME REGARDLESS OF SWIPE DISTANCE
     */

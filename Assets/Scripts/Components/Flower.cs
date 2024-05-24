@@ -11,9 +11,11 @@ public class Flower : MonoBehaviour
     private FlowerState flowerState = FlowerState.ACTIVE;
 
     private GameManager gameManager;
+    private AudioManager audioManager;
 
     private void Awake() {
         gameManager = GameManager.Instance;
+        audioManager = AudioManager.Instance;
     }
 
     // Using OnTriggerEnter2D instead of OnCollisionEnter2D for entering flower
@@ -28,13 +30,13 @@ public class Flower : MonoBehaviour
         if (other.CompareTag("Bee"))
         {
             gameManager.NotifyFlowerEntered(flowerColor);
+            audioManager.PlaySFX(audioManager.touchFlowerClip);
+
             Transform particleTransform = transform.Find("ParticlesPollinated");
             if (particleTransform != null)
             {
-                // Get the GameObject component from the Transform
                 GameObject particles = particleTransform.gameObject;
 
-                // Activate the GameObject
                 particles.SetActive(true);
             }
 
