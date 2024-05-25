@@ -1,9 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [DefaultExecutionOrder(-2)]
-public class AudioManager : MonoBehaviour
+public class AudioManager : MonoBehaviour, IDataPersistance
 {
     public static AudioManager Instance;
 
@@ -23,6 +22,9 @@ public class AudioManager : MonoBehaviour
     private List<AudioSource> audioSources = new List<AudioSource>();
     private float masterVolumeMusic = 1.0f;
     private float masterVolumeSfx = 0.7f;
+
+    private bool musicEnabled;
+    private bool sfxEnabled;
 
     private void Awake()
     {
@@ -83,6 +85,8 @@ public class AudioManager : MonoBehaviour
 
     public void SetMusicEnabled(bool enabled)
     {
+        musicEnabled = enabled;
+
         if (enabled)
         {
             audioSource.volume = masterVolumeMusic;
@@ -95,6 +99,8 @@ public class AudioManager : MonoBehaviour
 
     public void SetSFXEnabled(bool enabled)
     {
+        sfxEnabled = enabled;
+
         if (enabled)
         {
             SFXSource.volume = masterVolumeSfx;
@@ -116,5 +122,17 @@ public class AudioManager : MonoBehaviour
         {
             Debug.LogWarning("AudioSource is null or already registered.");
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.musicEnabled = data.musicEnabled;
+        this.sfxEnabled = data.sfxEnabled;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.musicEnabled = musicEnabled;
+        data.sfxEnabled = sfxEnabled;
     }
 }

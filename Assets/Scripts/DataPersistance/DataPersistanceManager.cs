@@ -1,8 +1,7 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class DataPersistanceManager : Singleton<DataPersistanceManager>
+[DefaultExecutionOrder(-1)]
+public class DataPersistanceManager : MonoBehaviour
 {
     [Header("File Storage Config")]
     [SerializeField]
@@ -11,56 +10,58 @@ public class DataPersistanceManager : Singleton<DataPersistanceManager>
     [SerializeField]
     private bool useEncryption;
 
-    private GameData gameData;
-    private List<IDataPersistance> dataPersistanceObjects;
-    private FileDataHandler dataHandler;
+    public static DataPersistanceManager Instance;
+    public static GameData GameData;
+    private static FileDataHandler dataHandler;
+    private static object fileLock = new object();
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
-        dataPersistanceObjects = FindAllDataPersistanceObjects();
         dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
         LoadGame();
     }
 
-    private void OnApplicationQuit()
-    {
-        SaveGame();
-    }
-
     public void NewGame()
     {
-        gameData = new GameData();
+        GameData = new GameData();
     }
 
     public void LoadGame()
     {
-        this.gameData = dataHandler.Load();
-
-        if (gameData == null)
+        lock (fileLock)
         {
-            Debug.Log("No game data was found, initialising default data");
-            NewGame();
-        }
-
-        foreach (IDataPersistance dataPersistanceObject in dataPersistanceObjects)
-        {
-            dataPersistanceObject.LoadData(gameData);
+            GameData = dataHandler.Load();
+            if (GameData == null)
+            {
+                Debug.Log("No game data was found, initialising default data");
+                NewGame();
+            }
+            else
+            {
+                Debug.Log("Loaded data: " + GameData);
+            }
         }
     }
 
-    public void SaveGame()
+    public static void SaveGame()
     {
-        foreach (IDataPersistance dataPersistanceObject in dataPersistanceObjects)
+        lock (fileLock)
         {
-            dataPersistanceObject.SaveData(ref gameData);
+            Debug.Log("Saving data: " + GameData);
+            dataHandler.Save(GameData);
         }
-
-        dataHandler.Save(gameData);
-    }
-
-    private List<IDataPersistance> FindAllDataPersistanceObjects()
-    {
-        IEnumerable<IDataPersistance> objects = FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistance>();
-        return new List<IDataPersistance>(objects);
     }
 }

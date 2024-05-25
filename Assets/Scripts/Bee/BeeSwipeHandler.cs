@@ -33,14 +33,12 @@ public class BeeSwipeHandler : Singleton<BeeSwipeHandler>
     private void SwipeStart(Vector2 position, float time)
     {
         startPosition = position;
-        Debug.Log("startPosition: " + startPosition);
         startTime = time;
     }
 
     private void SwipeEnd(Vector2 position, float time)
     {
         endPosition = position;
-        Debug.Log("endPosition: " + endPosition);
         endTime = time;
         Swipe();
     }

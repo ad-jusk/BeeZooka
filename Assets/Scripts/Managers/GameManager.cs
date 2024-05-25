@@ -27,7 +27,6 @@ public class GameManager : Singleton<GameManager>
     public event FlowerEntered OnFlowerEntered;
 
     #endregion
-    //private GameData gameData;
 
 
     #region  GameStats
@@ -80,13 +79,11 @@ public class GameManager : Singleton<GameManager>
     public void NotifyRestartButtonClicked()
     {
         OnRestartButtonClicked?.Invoke();
-        //LoadData(gameData);
     }
 
     public void NotifyNextLevelButtonClicked()
     {
         OnNextLevelButtonClicked?.Invoke();
-        //LoadData(gameData);
     }
 
     public void NotifyFlowerEntered(FlowerColor flowerColor)

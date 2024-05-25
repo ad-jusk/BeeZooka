@@ -18,7 +18,7 @@ public class Obstacle : MonoBehaviour
             gameManager.NotifyObstacleEntered();
             audioManager.PlaySFX(audioManager.obstacleHitClip);
 
-            Debug.Log("Obstacle hti");
+            Debug.Log("Obstacle hit");
 
             // Position the bee at the center of the flower
             Rigidbody2D beeRigidbody = other.GetComponent<Rigidbody2D>();

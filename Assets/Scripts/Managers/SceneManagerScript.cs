@@ -17,6 +17,9 @@ public class SceneManagerScript : Singleton<SceneManagerScript>
 
     public void QuitGame()
     {
+        // SAVE CURRENT STATE BEFORE QUITTING
+        DataPersistanceManager.SaveGame();
+        // QUIT
         Application.Quit();
 
 #if UNITY_EDITOR
