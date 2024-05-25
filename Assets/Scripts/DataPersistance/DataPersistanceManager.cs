@@ -34,12 +34,12 @@ public class DataPersistanceManager : MonoBehaviour
         LoadGame();
     }
 
-    public void NewGame()
+    private void NewGame()
     {
         GameData = new GameData();
     }
 
-    public void LoadGame()
+    private void LoadGame()
     {
         lock (fileLock)
         {

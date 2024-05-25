@@ -38,14 +38,17 @@ public class GameManager : Singleton<GameManager>
 
     private void Awake()
     {
-        string sceneName = SceneManager.GetActiveScene().name;
-        switch (sceneName)
+        int levelIndex = LevelIndexFromSceneExtractor.GetLevelIndex(SceneManager.GetActiveScene().name);
+        switch (levelIndex)
         {
-            case "1":
+            case 1:
                 flowersToCollect = new() { FlowerColor.RED, FlowerColor.PINK };
                 break;
-            case "2":
+            case 2:
                 flowersToCollect = new() { FlowerColor.RED, FlowerColor.PINK, FlowerColor.BLUE };
+                break;
+            default:
+                Debug.Log("Scene is not a level");
                 break;
         }
         collectedFlowers = new();
