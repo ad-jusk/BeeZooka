@@ -22,9 +22,8 @@ public class AudioManager : MonoBehaviour, IDataPersistance
     private List<AudioSource> audioSources = new List<AudioSource>();
     private float masterVolumeMusic = 1.0f;
     private float masterVolumeSfx = 0.7f;
-
-    private bool musicEnabled;
-    private bool sfxEnabled;
+    private bool musicEnabled = true;
+    private bool sfxEnabled = true;
 
     private void Awake()
     {
@@ -39,17 +38,22 @@ public class AudioManager : MonoBehaviour, IDataPersistance
         }
         RegisterAudioSource(audioSource, masterVolumeMusic);
         RegisterAudioSource(SFXSource, masterVolumeSfx);
+        audioSource.clip = backgroundMusicClip;
     }
 
     private void OnEnable()
     {
-        audioSource.clip = backgroundMusicClip;
-        PlayMusic();
+        PlayMusic();    
     }
 
     public void PlayMusic()
     {
-        if (audioSource != null)
+        if(!musicEnabled)
+        {
+            return;
+        }
+
+        if (audioSource != null && !audioSource.isPlaying)
         {
             audioSource.Play();
         }
@@ -73,6 +77,11 @@ public class AudioManager : MonoBehaviour, IDataPersistance
 
     public void PlaySFX(AudioClip audioClip)
     {
+        if(!sfxEnabled)
+        {
+            return;
+        }
+
         if (SFXSource != null && audioClip != null)
         {
             SFXSource.PlayOneShot(audioClip);
@@ -83,21 +92,29 @@ public class AudioManager : MonoBehaviour, IDataPersistance
         }
     }
 
-    public void SetMusicEnabled(bool enabled)
+    public void EnableOrDisableMusic(bool enabled)
     {
-        musicEnabled = enabled;
-
         if (enabled)
         {
             audioSource.volume = masterVolumeMusic;
+            if(!musicEnabled)
+            {
+                musicEnabled = true;
+                PlayMusic();
+            }
         }
         else
         {
             audioSource.volume = 0f;
+            if(musicEnabled)
+            {
+                musicEnabled = false;
+                StopMusic();
+            }
         }
     }
 
-    public void SetSFXEnabled(bool enabled)
+    public void EnableOrDisableSFX(bool enabled)
     {
         sfxEnabled = enabled;
 
@@ -128,11 +145,15 @@ public class AudioManager : MonoBehaviour, IDataPersistance
     {
         this.musicEnabled = data.musicEnabled;
         this.sfxEnabled = data.sfxEnabled;
+
+        if(!musicEnabled)
+        {
+            StopMusic();
+        }
     }
 
     public void SaveData(ref GameData data)
     {
-        data.musicEnabled = musicEnabled;
-        data.sfxEnabled = sfxEnabled;
+        // NOTHING
     }
 }
