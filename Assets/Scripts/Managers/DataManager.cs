@@ -9,7 +9,7 @@ public class DataManager : Singleton<DataManager>
 
     private void Start()
     {
-        dataPersistanceObjects = FindAllDataPersistanceObjects();
+        dataPersistanceObjects = FindAllDataPersistanceObjectsExceptAudioManager();
         LoadData();
     }
 
@@ -31,9 +31,10 @@ public class DataManager : Singleton<DataManager>
         DataPersistanceManager.SaveGame();
     }
 
-    private List<IDataPersistance> FindAllDataPersistanceObjects()
+    private List<IDataPersistance> FindAllDataPersistanceObjectsExceptAudioManager()
     {
-        IEnumerable<IDataPersistance> objects = FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistance>();
+        // HERE DONT DESTROY ON LOAD OBJECTS SHOULD BE FILTERED OUT AS THEY ARE HANDLED IN DATA PERSISTANCE MANAGER
+        IEnumerable<IDataPersistance> objects = FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistance>().Where(o => o is not AudioManager);
         return new List<IDataPersistance>(objects);
     }
 }

@@ -16,7 +16,7 @@ public class Obstacle : MonoBehaviour
         if (other.CompareTag("Bee"))
         {
             gameManager.NotifyObstacleEntered();
-            audioManager.PlaySFX(audioManager.obstacleHitClip);
+            audioManager.PlaySFX(AudioClipType.ObstacleHit);
 
             Debug.Log("Obstacle hit");
 

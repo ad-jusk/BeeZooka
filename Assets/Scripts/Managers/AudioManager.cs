@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,14 +42,9 @@ public class AudioManager : MonoBehaviour, IDataPersistance
         audioSource.clip = backgroundMusicClip;
     }
 
-    private void OnEnable()
-    {
-        PlayMusic();    
-    }
-
     public void PlayMusic()
     {
-        if(!musicEnabled)
+        if (!musicEnabled)
         {
             return;
         }
@@ -75,20 +71,35 @@ public class AudioManager : MonoBehaviour, IDataPersistance
         }
     }
 
-    public void PlaySFX(AudioClip audioClip)
+    public void PlaySFX(AudioClipType clipType)
     {
-        if(!sfxEnabled)
+        if (!sfxEnabled)
         {
             return;
         }
 
-        if (SFXSource != null && audioClip != null)
+        if (SFXSource == null)
         {
-            SFXSource.PlayOneShot(audioClip);
+            Debug.LogWarning("SFXSource is null");
         }
-        else
+
+        switch (clipType)
         {
-            Debug.LogWarning("SFXSource or audioClip is null.");
+            case AudioClipType.ButtonTouched:
+                SFXSource.PlayOneShot(buttonTouchClip);
+                break;
+            case AudioClipType.FlowerEntered:
+                SFXSource.PlayOneShot(touchFlowerClip);
+                break;
+            case AudioClipType.GameOver:
+                SFXSource.PlayOneShot(gameOverClip);
+                break;
+            case AudioClipType.ObstacleHit:
+                SFXSource.PlayOneShot(obstacleHitClip);
+                break;
+            default:
+                Debug.Log("Audio clip of type " + clipType + " does not exist");
+                break;
         }
     }
 
@@ -97,7 +108,7 @@ public class AudioManager : MonoBehaviour, IDataPersistance
         if (enabled)
         {
             audioSource.volume = masterVolumeMusic;
-            if(!musicEnabled)
+            if (!musicEnabled)
             {
                 musicEnabled = true;
                 PlayMusic();
@@ -106,7 +117,7 @@ public class AudioManager : MonoBehaviour, IDataPersistance
         else
         {
             audioSource.volume = 0f;
-            if(musicEnabled)
+            if (musicEnabled)
             {
                 musicEnabled = false;
                 StopMusic();
@@ -143,13 +154,9 @@ public class AudioManager : MonoBehaviour, IDataPersistance
 
     public void LoadData(GameData data)
     {
-        this.musicEnabled = data.musicEnabled;
-        this.sfxEnabled = data.sfxEnabled;
-
-        if(!musicEnabled)
-        {
-            StopMusic();
-        }
+        musicEnabled = data.musicEnabled;
+        sfxEnabled = data.sfxEnabled;
+        PlayMusic();
     }
 
     public void SaveData(ref GameData data)

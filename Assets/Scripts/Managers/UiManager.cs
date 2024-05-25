@@ -98,7 +98,7 @@ public class UiManager : Singleton<UiManager>
             switch (type)
             {
                 case 0:
-                    audioManager.PlaySFX(audioManager.gameOverClip);
+                    audioManager.PlaySFX(AudioClipType.GameOver);
                     break;
             }
         }

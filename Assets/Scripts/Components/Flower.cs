@@ -33,7 +33,7 @@ public class Flower : MonoBehaviour
         if (other.CompareTag("Bee"))
         {
             gameManager.NotifyFlowerEntered(flowerColor);
-            audioManager.PlaySFX(audioManager.touchFlowerClip);
+            audioManager.PlaySFX(AudioClipType.FlowerEntered);
 
             Transform particleTransform = transform.Find("ParticlesPollinated");
             if (particleTransform != null)

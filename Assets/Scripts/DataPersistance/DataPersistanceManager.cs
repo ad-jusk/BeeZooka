@@ -54,6 +54,17 @@ public class DataPersistanceManager : MonoBehaviour
                 Debug.Log("Loaded data: " + GameData);
             }
         }
+
+        LoadDataToDontDestroyOnLoadObjects();
+    }
+
+    /*
+    LOADS DATA TO OBJECTS PRESENT IN EVERY SCENE, TO PREVENT THEM FROM BEING UPDATED
+    EVERY TIME WE CHANGE SCENE
+    */
+    private void LoadDataToDontDestroyOnLoadObjects()
+    {
+        AudioManager.Instance.LoadData(GameData);
     }
 
     public static void SaveGame()

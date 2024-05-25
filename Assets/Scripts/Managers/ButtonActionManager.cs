@@ -14,7 +14,7 @@ public class ButtonActionManager : MonoBehaviour
     {
         if (audioManager != null)
         {
-            audioManager.PlaySFX(audioManager.buttonTouchClip);
+            audioManager.PlaySFX(AudioClipType.ButtonTouched);
         }
         else
         {

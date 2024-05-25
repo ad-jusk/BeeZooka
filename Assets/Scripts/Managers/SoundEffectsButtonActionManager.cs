@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class SoundEffectsButtonActionManager : ButtonActionManager, IDataPersistance {
-
+public class SoundEffectsButtonActionManager : ButtonActionManager, IDataPersistance
+{
     private bool musicEnabled = true;
     private bool sfxEnabled = true;
 
