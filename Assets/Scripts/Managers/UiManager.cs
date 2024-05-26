@@ -1,22 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using static System.Net.Mime.MediaTypeNames;
 
 [DefaultExecutionOrder(-1)]
-
 public class UiManager : Singleton<UiManager>
 {
     private GameManager gameManager;
     private InputManager inputManager;
     private AudioManager audioManager;
 
-    [SerializeField] public GameObject WinMenu;
-    [SerializeField] private GameObject pauseMenu;
-    [SerializeField] private GameObject lostMenu;
-    [SerializeField] private GameObject ingameMenu;
+    [SerializeField]
+    public GameObject WinMenu;
+
+    [SerializeField]
+    private GameObject pauseMenu;
+
+    [SerializeField]
+    private GameObject lostMenu;
+
+    [SerializeField]
+    private GameObject ingameMenu;
+
     private void Awake()
     {
         gameManager = GameManager.Instance;
@@ -30,12 +33,11 @@ public class UiManager : Singleton<UiManager>
         gameManager.OnResumeButtonClicked += HandleResumeButtonClicked;
         gameManager.OnRestartButtonClicked += HandleRestartButtonClicked;
 
-        inputManager.OnEscapePressed  += HandlePauseButtonClicked;
+        inputManager.OnEscapePressed += HandlePauseButtonClicked;
     }
 
     private void HandleFlowerEntered(FlowerColor flowerColor)
     {
-        
         Debug.Log("A flower of color " + flowerColor + " entered!");
 
         Transform textTransform = ingameMenu.transform.Find(flowerColor.ToString());
@@ -56,26 +58,31 @@ public class UiManager : Singleton<UiManager>
             Debug.LogError($"Child GameObject with the name '{flowerColor.ToString()}' not found under the canvas.");
         }
     }
+
     private void HandleOnBeehiveMissed()
     {
         lostMenu.SetActive(true);
         audioManager.StopMusic();
         PlaySFX(0);
     }
+
     private void HandleObstacleEntered()
     {
         lostMenu.SetActive(true);
         audioManager.StopMusic();
         PlaySFX(0);
     }
+
     private void HandlePauseButtonClicked()
     {
         pauseMenu.SetActive(true);
     }
+
     private void HandleResumeButtonClicked()
     {
         pauseMenu.SetActive(false);
     }
+
     private void HandleRestartButtonClicked()
     {
         lostMenu.SetActive(false);
@@ -91,7 +98,7 @@ public class UiManager : Singleton<UiManager>
             switch (type)
             {
                 case 0:
-                    audioManager.PlaySFX(audioManager.gameOverClip);
+                    audioManager.PlaySFX(AudioClipType.GameOver);
                     break;
             }
         }
