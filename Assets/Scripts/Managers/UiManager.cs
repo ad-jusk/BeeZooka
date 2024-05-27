@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -61,6 +62,10 @@ public class UiManager : Singleton<UiManager>
 
     private void HandleOnBeehiveMissed()
     {
+        if (pauseMenu.activeSelf)
+        {
+            pauseMenu.SetActive(false);
+        }
         lostMenu.SetActive(true);
         audioManager.StopMusic();
         PlaySFX(0);
@@ -68,9 +73,13 @@ public class UiManager : Singleton<UiManager>
 
     private void HandleObstacleEntered()
     {
-        lostMenu.SetActive(true);
+        if (pauseMenu.activeSelf)
+        {
+            pauseMenu.SetActive(false);
+        }
         audioManager.StopMusic();
         PlaySFX(0);
+        StartCoroutine(WaitForAnimationToFinish());
     }
 
     private void HandlePauseButtonClicked()
@@ -106,5 +115,10 @@ public class UiManager : Singleton<UiManager>
         {
             Debug.LogError("AudioManager instance not found");
         }
+    }
+    private IEnumerator WaitForAnimationToFinish()
+    {
+        yield return new WaitForSeconds(2.0f);
+        lostMenu.SetActive(true);
     }
 }
