@@ -33,6 +33,7 @@ public class UiManager : Singleton<UiManager>
         gameManager.OnPauseButtonClicked += HandlePauseButtonClicked;
         gameManager.OnResumeButtonClicked += HandleResumeButtonClicked;
         gameManager.OnRestartButtonClicked += HandleRestartButtonClicked;
+        gameManager.OnHomeButtonClicked += HandleHomeButtonClicked;
 
         inputManager.OnEscapePressed += HandlePauseButtonClicked;
     }
@@ -97,6 +98,11 @@ public class UiManager : Singleton<UiManager>
         lostMenu.SetActive(false);
         pauseMenu.SetActive(false);
         WinMenu.SetActive(false);
+        audioManager.PlayMusic();
+    }
+
+    private void HandleHomeButtonClicked()
+    {
         audioManager.PlayMusic();
     }
 
