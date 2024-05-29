@@ -44,12 +44,12 @@ public class Obstacle : MonoBehaviour
 
         switch (Type)
         {
-            case ObstacleType.wasp:
-            case ObstacleType.mite:
+            case ObstacleType.WASP:
+            case ObstacleType.MITE:
                 yield return HandleWaspOrMiteAttack(beeRigidbody);
                 break;
 
-            case ObstacleType.factory:
+            case ObstacleType.FACTORY:
                 HandleFactoryInteraction(beeRigidbody);
                 break;
         }

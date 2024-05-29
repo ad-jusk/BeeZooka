@@ -1,7 +1,7 @@
 public enum ObstacleType
 {
-    factory,
-    wasp,
-    mite,
-    buldozer
+    FACTORY,
+    WASP,
+    MITE,
+    BULDOZER
 };
