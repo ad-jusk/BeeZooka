@@ -12,6 +12,7 @@ TagManager:
   - 3
   - 4
   - 5
+  - wasp
   layers:
   - Default
   - TransparentFX

@@ -53,7 +53,7 @@ public class Flower : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        // If the bee exits the flower collider trigger, set the flower inactive
+        // If the bee exits the flower beeCollider trigger, set the flower inactive
         if (other.CompareTag("Bee"))
         {
             SetFlowerInactive();

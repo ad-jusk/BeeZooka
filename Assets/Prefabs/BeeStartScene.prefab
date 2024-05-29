@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5241230302757701874}
   - component: {fileID: 2250075981605783541}
   m_Layer: 5
-  m_Name: wingl
+  m_Name: bee_wingl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 2321134366617562086}
   - component: {fileID: 3155019538002086821}
   m_Layer: 5
-  m_Name: flegl
+  m_Name: bee_front_legl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 5489741677449139570}
   - component: {fileID: 3910443277817028466}
   m_Layer: 5
-  m_Name: blegl
+  m_Name: bee_back_legl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 6899928984847816435}
   - component: {fileID: 6916153278006241261}
   m_Layer: 5
-  m_Name: bee
+  m_Name: bee_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 8255896940247635308}
   - component: {fileID: 7434390357002725476}
   m_Layer: 5
-  m_Name: wingr
+  m_Name: bee_wingr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: 5045362128280470984}
   - component: {fileID: 7507240771264588863}
   m_Layer: 5
-  m_Name: flegr
+  m_Name: bee_front_legr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -504,7 +504,7 @@ GameObject:
   - component: {fileID: 7656680334218142530}
   - component: {fileID: 1830899956936318227}
   m_Layer: 5
-  m_Name: blegr
+  m_Name: bee_back_legr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

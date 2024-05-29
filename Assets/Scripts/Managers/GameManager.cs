@@ -22,6 +22,8 @@ public class GameManager : Singleton<GameManager>
     public event RestartButtonClicked OnRestartButtonClicked;
     public delegate void NextLevelButtonClicked();
     public event NextLevelButtonClicked OnNextLevelButtonClicked;
+    public delegate void HomeButtonClicked();
+    public event HomeButtonClicked OnHomeButtonClicked;
 
     public delegate void FlowerEntered(FlowerColor flowerColor);
     public event FlowerEntered OnFlowerEntered;
@@ -87,6 +89,11 @@ public class GameManager : Singleton<GameManager>
     public void NotifyNextLevelButtonClicked()
     {
         OnNextLevelButtonClicked?.Invoke();
+    }
+
+    public void NotifyHomeButtonClicked()
+    {
+        OnHomeButtonClicked?.Invoke();
     }
 
     public void NotifyFlowerEntered(FlowerColor flowerColor)
