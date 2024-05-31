@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [DefaultExecutionOrder(-1)]
 public class UiManager : Singleton<UiManager>
@@ -53,7 +55,21 @@ public class UiManager : Singleton<UiManager>
 
     private IEnumerator HideToDoCanvas()
     {
-        yield return new WaitForSeconds(2);
+        //yield return new WaitForSeconds(2);
+        new WaitForSeconds(0.3f);
+        Image targetImage = toDoCanvas.GetComponentsInChildren<Image>()
+                              .FirstOrDefault(image => image.CompareTag("ProgressBar"));
+        float duration = 2f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            targetImage.fillAmount = Mathf.Lerp(1f, 0f, elapsed / duration);
+            yield return null;
+        }
+
+        targetImage.fillAmount = 0f;
         toDoCanvas.SetActive(false);
     }
 
