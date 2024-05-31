@@ -3,5 +3,6 @@ public enum ObstacleType
     FACTORY,
     WASP,
     MITE,
-    BULDOZER
+    BULDOZER,
+    SMOKER
 };
