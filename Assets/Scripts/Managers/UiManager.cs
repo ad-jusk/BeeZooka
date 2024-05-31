@@ -21,6 +21,9 @@ public class UiManager : Singleton<UiManager>
     [SerializeField]
     private GameObject ingameMenu;
 
+    [SerializeField]
+    private GameObject toDoCanvas;
+
     private void Awake()
     {
         gameManager = GameManager.Instance;
@@ -36,6 +39,22 @@ public class UiManager : Singleton<UiManager>
         gameManager.OnHomeButtonClicked += HandleHomeButtonClicked;
 
         inputManager.OnEscapePressed += HandlePauseButtonClicked;
+    }
+
+    private void OnEnable()
+    {
+        if(LevelManager.ShowToDoCanvas)
+        {
+            toDoCanvas.SetActive(true);
+            LevelManager.ShowToDoCanvas = false;
+            StartCoroutine(HideToDoCanvas());
+        }
+    }
+
+    private IEnumerator HideToDoCanvas()
+    {
+        yield return new WaitForSeconds(2);
+        toDoCanvas.SetActive(false);
     }
 
     private void HandleFlowerEntered(FlowerColor flowerColor)

@@ -48,6 +48,7 @@ public class ScreenCollider : MonoBehaviour
         else
         {
             collidingRB.AddForce(Vector3.Reflect(collision.relativeVelocity, contactPoints[0].normal) * bounceForce);
+            LevelManager.NumberOfEdgeCollisions++;
         }
     }
 }

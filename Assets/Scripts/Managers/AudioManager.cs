@@ -44,12 +44,12 @@ public class AudioManager : MonoBehaviour, IDataPersistance
 
     public void PlayMusic()
     {
-        if (!musicEnabled)
+        if (!musicEnabled || audioSource.isPlaying)
         {
             return;
         }
 
-        if (audioSource != null && !audioSource.isPlaying)
+        if (audioSource != null)
         {
             audioSource.Play();
         }
