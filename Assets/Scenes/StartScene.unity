@@ -1395,6 +1395,7 @@ MonoBehaviour:
   buttonTouchClip: {fileID: 8300000, guid: 3e813530fd0f8284a98764aaf33ca718, type: 3}
   gameOverClip: {fileID: 8300000, guid: 9ea16789bb125a04abf7834f086164ac, type: 3}
   obstacleHitClip: {fileID: 8300000, guid: 6facc4a3b722bda4c823d4f3c587694b, type: 3}
+  gameWonClip: {fileID: 8300000, guid: d34b3e80472eaba448959e785f1a73db, type: 3}
 --- !u!1 &1173901107
 GameObject:
   m_ObjectHideFlags: 0

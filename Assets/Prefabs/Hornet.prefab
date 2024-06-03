@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2618975937556308984}
   - component: {fileID: 5327447675381042742}
   - component: {fileID: 3303591487861515102}
+  - component: {fileID: 635548987955841156}
   m_Layer: 0
   m_Name: Hornet
   m_TagString: Untagged
@@ -92,6 +93,20 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.5, y: 1.57}
   m_Direction: 0
+--- !u!114 &635548987955841156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972960052586024634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3442c1049998f8e4eb551078d634fe37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObstacleAnimator: {fileID: 5327447675381042742}
+  Type: 1
 --- !u!1 &3308820030159074607
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +181,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9eb399c50d30779478e1e208bea88827, type: 3}
+  m_Sprite: {fileID: 21300000, guid: db2fdc27ac4d69e4dbfcfd4ff1d595b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -272,7 +287,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a730c4c4d56804447bb5c00741128c55, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.98490566, g: 0.7931199, b: 0.39210388, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -356,7 +371,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5463a4a9e46baaf40becbc9c7112cd13, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9843137, g: 0.7921569, b: 0.39215687, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

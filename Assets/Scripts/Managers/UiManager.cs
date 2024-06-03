@@ -52,6 +52,11 @@ public class UiManager : Singleton<UiManager>
             StartCoroutine(HideToDoCanvas());
         }
     }
+    public void LevelCleared()
+    {
+        WinMenu.SetActive(true);
+        StartCoroutine(WinMenuSound());
+    }
 
     private IEnumerator HideToDoCanvas()
     {
@@ -150,6 +155,9 @@ public class UiManager : Singleton<UiManager>
                 case 0:
                     audioManager.PlaySFX(AudioClipType.GameOver);
                     break;
+                case 1:
+                    audioManager.PlaySFX(AudioClipType.GameWon);
+                    break;
             }
         }
         else
@@ -161,5 +169,12 @@ public class UiManager : Singleton<UiManager>
     {
         yield return new WaitForSeconds(2.0f);
         lostMenu.SetActive(true);
+    }
+    private IEnumerator WinMenuSound()
+    {
+        StartCoroutine(audioManager.ChangeVolumeByTime(0.2f, 1.0f, 0.1f));
+        PlaySFX(1);
+        yield return new WaitForSeconds(1.0f);
+        StartCoroutine(audioManager.ChangeVolumeByTime(4.0f, 0.1f, 1.0f));
     }
 }
