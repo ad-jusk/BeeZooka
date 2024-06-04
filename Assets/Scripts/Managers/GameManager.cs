@@ -52,6 +52,12 @@ public class GameManager : Singleton<GameManager>
             case 3:
                 flowersToCollect = new() { FlowerColor.RED, FlowerColor.RED, FlowerColor.BLUE };
                 break;
+            case 4:
+                flowersToCollect = new () {FlowerColor.RED, FlowerColor.RED, FlowerColor.RED, FlowerColor.RED};
+                break;
+            case 5:
+                flowersToCollect = new () {FlowerColor.BLUE, FlowerColor.PINK};
+                break;
             default:
                 Debug.Log("Scene is not a level");
                 break;
@@ -107,7 +113,7 @@ public class GameManager : Singleton<GameManager>
 
     public bool AllFlowersCollected()
     {
-        if (flowersToCollect.Count != collectedFlowers.Count)
+        if (collectedFlowers.Count == 0)
         {
             return false;
         }
@@ -131,10 +137,6 @@ public class GameManager : Singleton<GameManager>
             if (itemCounts.ContainsKey(s))
             {
                 itemCounts[s]--;
-            }
-            else
-            {
-                return false;
             }
         }
         return itemCounts.Values.All(c => c == 0);

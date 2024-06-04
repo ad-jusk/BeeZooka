@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Mite : MonoBehaviour
 {
-    public float speed = 2f;
+    public float speed = 3f;
 
     [SerializeField]
     private bool movingRight = false; 
