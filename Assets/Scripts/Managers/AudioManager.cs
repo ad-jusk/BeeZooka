@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,7 @@ public class AudioManager : MonoBehaviour, IDataPersistance
     public AudioClip buttonTouchClip;
     public AudioClip gameOverClip;
     public AudioClip obstacleHitClip;
+    public AudioClip gameWonClip;
 
     private List<AudioSource> audioSources = new List<AudioSource>();
     private float masterVolumeMusic = 1.0f;
@@ -44,12 +46,12 @@ public class AudioManager : MonoBehaviour, IDataPersistance
 
     public void PlayMusic()
     {
-        if (!musicEnabled)
+        if (!musicEnabled || audioSource.isPlaying)
         {
             return;
         }
 
-        if (audioSource != null && !audioSource.isPlaying)
+        if (audioSource != null)
         {
             audioSource.Play();
         }
@@ -97,6 +99,9 @@ public class AudioManager : MonoBehaviour, IDataPersistance
             case AudioClipType.ObstacleHit:
                 SFXSource.PlayOneShot(obstacleHitClip);
                 break;
+            case AudioClipType.GameWon:
+                SFXSource.PlayOneShot(gameWonClip);
+                break;
             default:
                 Debug.Log("Audio clip of type " + clipType + " does not exist");
                 break;
@@ -138,7 +143,24 @@ public class AudioManager : MonoBehaviour, IDataPersistance
             SFXSource.volume = 0f;
         }
     }
+    public void ChangeMusicVolume(float volume)
+    {
+        audioSource.volume = volume;
+    }
+    public IEnumerator ChangeVolumeByTime(float seconds, float startVolume, float endVolume)
+    {
+        //yield return new WaitForSeconds(seconds);
+        float duration = seconds;
+        float elapsed = 0f;
 
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            ChangeMusicVolume( Mathf.Lerp(startVolume, endVolume, elapsed / duration));
+            yield return null;
+        }
+        //WinMenuSound(1.0f);
+    }
     private void RegisterAudioSource(AudioSource source, float masterVolume)
     {
         if (source != null && !audioSources.Contains(source))

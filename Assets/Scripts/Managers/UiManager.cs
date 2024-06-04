@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [DefaultExecutionOrder(-1)]
 public class UiManager : Singleton<UiManager>
@@ -21,6 +23,9 @@ public class UiManager : Singleton<UiManager>
     [SerializeField]
     private GameObject ingameMenu;
 
+    [SerializeField]
+    private GameObject toDoCanvas;
+
     private void Awake()
     {
         gameManager = GameManager.Instance;
@@ -36,6 +41,41 @@ public class UiManager : Singleton<UiManager>
         gameManager.OnHomeButtonClicked += HandleHomeButtonClicked;
 
         inputManager.OnEscapePressed += HandlePauseButtonClicked;
+    }
+
+    private void OnEnable()
+    {
+        if(LevelManager.ShowToDoCanvas)
+        {
+            toDoCanvas.SetActive(true);
+            LevelManager.ShowToDoCanvas = false;
+            StartCoroutine(HideToDoCanvas());
+        }
+    }
+    public void LevelCleared()
+    {
+        WinMenu.SetActive(true);
+        StartCoroutine(WinMenuSound());
+    }
+
+    private IEnumerator HideToDoCanvas()
+    {
+        //yield return new WaitForSeconds(2);
+        new WaitForSeconds(0.3f);
+        Image targetImage = toDoCanvas.GetComponentsInChildren<Image>()
+                              .FirstOrDefault(image => image.CompareTag("ProgressBar"));
+        float duration = 2f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            targetImage.fillAmount = Mathf.Lerp(1f, 0f, elapsed / duration);
+            yield return null;
+        }
+
+        targetImage.fillAmount = 0f;
+        toDoCanvas.SetActive(false);
     }
 
     private void HandleFlowerEntered(FlowerColor flowerColor)
@@ -115,6 +155,9 @@ public class UiManager : Singleton<UiManager>
                 case 0:
                     audioManager.PlaySFX(AudioClipType.GameOver);
                     break;
+                case 1:
+                    audioManager.PlaySFX(AudioClipType.GameWon);
+                    break;
             }
         }
         else
@@ -126,5 +169,12 @@ public class UiManager : Singleton<UiManager>
     {
         yield return new WaitForSeconds(2.0f);
         lostMenu.SetActive(true);
+    }
+    private IEnumerator WinMenuSound()
+    {
+        StartCoroutine(audioManager.ChangeVolumeByTime(0.2f, 1.0f, 0.1f));
+        PlaySFX(1);
+        yield return new WaitForSeconds(1.0f);
+        StartCoroutine(audioManager.ChangeVolumeByTime(4.0f, 0.1f, 1.0f));
     }
 }

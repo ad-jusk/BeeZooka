@@ -6,6 +6,8 @@ public class SceneManagerScript : Singleton<SceneManagerScript>
 {
     public void ChangeScene(string sceneName)
     {
+        // RESET LEVEL MANAGER
+        LevelManager.Reset();
         SceneManager.LoadScene(sceneName);
     }
 

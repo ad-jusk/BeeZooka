@@ -50,7 +50,8 @@ public class Obstacle : MonoBehaviour
                 break;
 
             case ObstacleType.FACTORY:
-                HandleFactoryInteraction(beeRigidbody);
+            case ObstacleType.SMOKER:
+                HandleSmokeObstacleInteraction(beeRigidbody);
                 break;
         }
     }
@@ -65,13 +66,14 @@ public class Obstacle : MonoBehaviour
                 transform.position.y - 0.2f
             );
             yield return new WaitForSeconds(ObstacleAnimator.GetCurrentAnimatorStateInfo(0).length * 0.8f);
+
             beeAnimator.SetBool("isDefeated", true);
 
             ObstacleAnimator.SetBool("isAttacking", false);
         }
     }
 
-    private void HandleFactoryInteraction(Rigidbody2D beeRigidbody)
+    private void HandleSmokeObstacleInteraction(Rigidbody2D beeRigidbody)
     {
         Animator beeAnimator = beeRigidbody.GetComponent<Animator>();
         beeAnimator.SetBool("isDefeated", true);
