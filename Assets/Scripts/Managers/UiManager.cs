@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using TMPro;
@@ -10,7 +11,8 @@ public class UiManager : Singleton<UiManager>
     private GameManager gameManager;
     private InputManager inputManager;
     private AudioManager audioManager;
-
+    private int currentNumber = 0;
+    private int maxNumber = 1;
     [SerializeField]
     public GameObject WinMenu;
 
@@ -41,6 +43,7 @@ public class UiManager : Singleton<UiManager>
         gameManager.OnHomeButtonClicked += HandleHomeButtonClicked;
 
         inputManager.OnEscapePressed += HandlePauseButtonClicked;
+        audioManager.ChangeMusicVolume(1.0f);
     }
 
     private void OnEnable()
@@ -58,25 +61,7 @@ public class UiManager : Singleton<UiManager>
         StartCoroutine(WinMenuSound());
     }
 
-    private IEnumerator HideToDoCanvas()
-    {
-        //yield return new WaitForSeconds(2);
-        new WaitForSeconds(0.3f);
-        Image targetImage = toDoCanvas.GetComponentsInChildren<Image>()
-                              .FirstOrDefault(image => image.CompareTag("ProgressBar"));
-        float duration = 2f;
-        float elapsed = 0f;
 
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            targetImage.fillAmount = Mathf.Lerp(1f, 0f, elapsed / duration);
-            yield return null;
-        }
-
-        targetImage.fillAmount = 0f;
-        toDoCanvas.SetActive(false);
-    }
 
     private void HandleFlowerEntered(FlowerColor flowerColor)
     {
@@ -86,9 +71,20 @@ public class UiManager : Singleton<UiManager>
         if (textTransform != null)
         {
             TextMeshProUGUI textMeshPro = textTransform.GetComponentInChildren<TextMeshProUGUI>();
+            string[] parts = textMeshPro.text.ToString().Split('/');
+
             if (textMeshPro != null)
             {
-                textMeshPro.text = "1/1";
+                if (parts.Length >= 2)
+                {
+                    currentNumber = int.Parse(parts[0]);
+                    currentNumber++;
+                    maxNumber = int.Parse(parts[1]);
+
+                    Debug.Log("Current Number: " + currentNumber);
+                    Debug.Log("Max Number: " + maxNumber);
+                }
+                textMeshPro.text = $"{currentNumber}/{maxNumber}";
             }
             else
             {
@@ -165,6 +161,25 @@ public class UiManager : Singleton<UiManager>
             Debug.LogError("AudioManager instance not found");
         }
     }
+    private IEnumerator HideToDoCanvas()
+    {
+        //yield return new WaitForSeconds(2);
+        new WaitForSeconds(0.3f);
+        Image targetImage = toDoCanvas.GetComponentsInChildren<Image>()
+                              .FirstOrDefault(image => image.CompareTag("ProgressBar"));
+        float duration = 2f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            targetImage.fillAmount = Mathf.Lerp(1f, 0f, elapsed / duration);
+            yield return null;
+        }
+
+        targetImage.fillAmount = 0f;
+        toDoCanvas.SetActive(false);
+    }
     private IEnumerator WaitForAnimationToFinish()
     {
         yield return new WaitForSeconds(2.0f);
@@ -174,7 +189,7 @@ public class UiManager : Singleton<UiManager>
     {
         StartCoroutine(audioManager.ChangeVolumeByTime(0.2f, 1.0f, 0.1f));
         PlaySFX(1);
-        yield return new WaitForSeconds(1.0f);
-        StartCoroutine(audioManager.ChangeVolumeByTime(4.0f, 0.1f, 1.0f));
+        yield return new WaitForSeconds(2.0f);
+        StartCoroutine(audioManager.ChangeVolumeByTime(2.0f, 0.1f, 1.0f));
     }
 }
