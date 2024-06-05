@@ -8,6 +8,7 @@ public class ButtonActionManager : MonoBehaviour
     protected void OnEnable()
     {
         audioManager = AudioManager.Instance;
+        audioManager.ResetVolumes();
     }
 
     public void PlayButtonTouchSound()

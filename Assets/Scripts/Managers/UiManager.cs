@@ -43,7 +43,6 @@ public class UiManager : Singleton<UiManager>
         gameManager.OnHomeButtonClicked += HandleHomeButtonClicked;
 
         inputManager.OnEscapePressed += HandlePauseButtonClicked;
-        audioManager.ChangeMusicVolume(1.0f);
     }
 
     private void OnEnable()
@@ -58,7 +57,7 @@ public class UiManager : Singleton<UiManager>
     public void LevelCleared()
     {
         WinMenu.SetActive(true);
-        StartCoroutine(WinMenuSound());
+        WinMenuSound();
     }
 
 
@@ -163,7 +162,6 @@ public class UiManager : Singleton<UiManager>
     }
     private IEnumerator HideToDoCanvas()
     {
-        //yield return new WaitForSeconds(2);
         new WaitForSeconds(0.3f);
         Image targetImage = toDoCanvas.GetComponentsInChildren<Image>()
                               .FirstOrDefault(image => image.CompareTag("ProgressBar"));
@@ -185,11 +183,9 @@ public class UiManager : Singleton<UiManager>
         yield return new WaitForSeconds(2.0f);
         lostMenu.SetActive(true);
     }
-    private IEnumerator WinMenuSound()
+    private void WinMenuSound()
     {
-        StartCoroutine(audioManager.ChangeVolumeByTime(0.2f, 1.0f, 0.1f));
+        audioManager.ChangeMusicVolume(0.5f);
         PlaySFX(1);
-        yield return new WaitForSeconds(2.0f);
-        StartCoroutine(audioManager.ChangeVolumeByTime(2.0f, 0.1f, 1.0f));
     }
 }
