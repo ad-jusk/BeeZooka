@@ -147,13 +147,13 @@ public class AudioManager : MonoBehaviour, IDataPersistance
         audioSource.volume = volume;
     }
 
-    public void ResetVolumes() 
+    public void ResetVolumes()
     {
-        if(audioSource.volume != masterVolumeMusic)
+        if (audioSource.volume != masterVolumeMusic)
         {
             audioSource.volume = masterVolumeMusic;
         }
-        if(SFXSource.volume != masterVolumeSfx)
+        if (SFXSource.volume != masterVolumeSfx)
         {
             SFXSource.volume = masterVolumeSfx;
         }

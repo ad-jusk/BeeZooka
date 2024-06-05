@@ -1,4 +1,3 @@
-
 // STATIC LASS FOR STORING DATA RELEVANT FOR SINGLE LEVEL
 
 public static class LevelManager

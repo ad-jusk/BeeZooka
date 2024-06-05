@@ -10,7 +10,7 @@ public class Mite : MonoBehaviour
     public float speed = 3f;
 
     [SerializeField]
-    private bool movingRight = false; 
+    private bool movingRight = false;
 
     private float leftScreenBorder;
     private float rightScreenBorder;
@@ -21,17 +21,18 @@ public class Mite : MonoBehaviour
         CalculateScreenBorders();
         gameManager = GameManager.Instance;
         gameManager.OnObstacleEntered += HandleObstacleEntered;
-
     }
 
     void FixedUpdate()
     {
         Move();
     }
+
     private void HandleObstacleEntered()
     {
         speed = 0;
     }
+
     private void CalculateScreenBorders()
     {
         Camera mainCamera = Camera.main;

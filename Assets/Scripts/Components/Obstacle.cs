@@ -11,6 +11,7 @@ public class Obstacle : MonoBehaviour
     private AudioManager audioManager;
     private Collider2D beeCollider;
     private bool hasPlayedSound = false;
+
     private void Awake()
     {
         gameManager = GameManager.Instance;
@@ -38,6 +39,7 @@ public class Obstacle : MonoBehaviour
             StartCoroutine(ObstacleEnteredAnimation(beeRigidbody));
         }
     }
+
     private IEnumerator ObstacleEnteredAnimation(Rigidbody2D beeRigidbody)
     {
         beeCollider.isTrigger = false;
@@ -55,16 +57,14 @@ public class Obstacle : MonoBehaviour
                 break;
         }
     }
+
     private IEnumerator HandleWaspOrMiteAttack(Rigidbody2D beeRigidbody)
     {
         Animator beeAnimator = beeRigidbody.GetComponent<Animator>();
         if (ObstacleAnimator != null)
         {
             ObstacleAnimator.SetBool("isAttacking", true);
-            beeRigidbody.position = new Vector2(
-                transform.position.x - 0.35f,
-                transform.position.y - 0.2f
-            );
+            beeRigidbody.position = new Vector2(transform.position.x - 0.35f, transform.position.y - 0.2f);
             yield return new WaitForSeconds(ObstacleAnimator.GetCurrentAnimatorStateInfo(0).length * 0.8f);
 
             beeAnimator.SetBool("isDefeated", true);
@@ -100,6 +100,6 @@ public class Obstacle : MonoBehaviour
             yield return null;
         }
 
-        spriteRenderer.color = targetColor; 
+        spriteRenderer.color = targetColor;
     }
 }

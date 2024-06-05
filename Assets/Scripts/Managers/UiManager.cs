@@ -13,6 +13,7 @@ public class UiManager : Singleton<UiManager>
     private AudioManager audioManager;
     private int currentNumber = 0;
     private int maxNumber = 1;
+
     [SerializeField]
     public GameObject WinMenu;
 
@@ -47,20 +48,19 @@ public class UiManager : Singleton<UiManager>
 
     private void OnEnable()
     {
-        if(LevelManager.ShowToDoCanvas)
+        if (LevelManager.ShowToDoCanvas)
         {
             toDoCanvas.SetActive(true);
             LevelManager.ShowToDoCanvas = false;
             StartCoroutine(HideToDoCanvas());
         }
     }
+
     public void LevelCleared()
     {
         WinMenu.SetActive(true);
         WinMenuSound();
     }
-
-
 
     private void HandleFlowerEntered(FlowerColor flowerColor)
     {
@@ -160,11 +160,11 @@ public class UiManager : Singleton<UiManager>
             Debug.LogError("AudioManager instance not found");
         }
     }
+
     private IEnumerator HideToDoCanvas()
     {
         new WaitForSeconds(0.3f);
-        Image targetImage = toDoCanvas.GetComponentsInChildren<Image>()
-                              .FirstOrDefault(image => image.CompareTag("ProgressBar"));
+        Image targetImage = toDoCanvas.GetComponentsInChildren<Image>().FirstOrDefault(image => image.CompareTag("ProgressBar"));
         float duration = 2f;
         float elapsed = 0f;
 
@@ -178,11 +178,13 @@ public class UiManager : Singleton<UiManager>
         targetImage.fillAmount = 0f;
         toDoCanvas.SetActive(false);
     }
+
     private IEnumerator WaitForAnimationToFinish()
     {
         yield return new WaitForSeconds(2.0f);
         lostMenu.SetActive(true);
     }
+
     private void WinMenuSound()
     {
         audioManager.ChangeMusicVolume(0.5f);
