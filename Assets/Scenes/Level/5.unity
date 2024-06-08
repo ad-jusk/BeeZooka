@@ -1038,7 +1038,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 910308037210213964, guid: ba2b01f3398d57e4da9c9918718f774d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -363.16586
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 910308037210213964, guid: ba2b01f3398d57e4da9c9918718f774d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3076,7 +3076,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 910308037210213964, guid: ba2b01f3398d57e4da9c9918718f774d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.65
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 910308037210213964, guid: ba2b01f3398d57e4da9c9918718f774d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4455,7 +4455,7 @@ Transform:
   m_GameObject: {fileID: 1001290656}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1189641, y: -0.4484856, z: 357.51587}
+  m_LocalPosition: {x: 1.1189641, y: -0.4484856, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5913,7 +5913,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 910308037210213964, guid: ba2b01f3398d57e4da9c9918718f774d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.65
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 910308037210213964, guid: ba2b01f3398d57e4da9c9918718f774d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7677,6 +7677,7 @@ MonoBehaviour:
   lostMenu: {fileID: 88156381}
   ingameMenu: {fileID: 1782722359}
   toDoCanvas: {fileID: 317816489}
+  tutorialCanvas: {fileID: 0}
 --- !u!1 &2074849418
 GameObject:
   m_ObjectHideFlags: 0

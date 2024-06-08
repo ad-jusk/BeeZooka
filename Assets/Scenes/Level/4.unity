@@ -5059,7 +5059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 910308037210213964, guid: ba2b01f3398d57e4da9c9918718f774d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.65
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 910308037210213964, guid: ba2b01f3398d57e4da9c9918718f774d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7217,6 +7217,7 @@ MonoBehaviour:
   lostMenu: {fileID: 88156381}
   ingameMenu: {fileID: 1782722359}
   toDoCanvas: {fileID: 317816489}
+  tutorialCanvas: {fileID: 0}
 --- !u!1 &2074849418
 GameObject:
   m_ObjectHideFlags: 0

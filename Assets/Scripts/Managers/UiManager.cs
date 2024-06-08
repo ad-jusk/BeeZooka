@@ -29,6 +29,9 @@ public class UiManager : Singleton<UiManager>
     [SerializeField]
     private GameObject toDoCanvas;
 
+    [SerializeField]
+    private GameObject tutorialCanvas;
+
     private void Awake()
     {
         gameManager = GameManager.Instance;
@@ -53,6 +56,10 @@ public class UiManager : Singleton<UiManager>
             toDoCanvas.SetActive(true);
             LevelManager.ShowToDoCanvas = false;
             StartCoroutine(HideToDoCanvas());
+        }
+        else
+        {
+            tutorialCanvas.SetActive(true);
         }
     }
 
@@ -177,6 +184,7 @@ public class UiManager : Singleton<UiManager>
 
         targetImage.fillAmount = 0f;
         toDoCanvas.SetActive(false);
+        tutorialCanvas.SetActive(true);
     }
 
     private IEnumerator WaitForAnimationToFinish()
