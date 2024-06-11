@@ -102,7 +102,7 @@ public class UiManager : Singleton<UiManager>
         }
         else
         {
-            Debug.LogWarning($"Child GameObject with the name '{flowerColor.ToString()}' not found under the canvas.");
+            Debug.LogWarning($"Child GameObject with the name '{flowerColor}' not found under the canvas.");
         }
     }
 

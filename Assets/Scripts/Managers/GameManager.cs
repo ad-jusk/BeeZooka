@@ -58,6 +58,18 @@ public class GameManager : Singleton<GameManager>
             case 5:
                 flowersToCollect = new() { FlowerColor.BLUE, FlowerColor.PINK };
                 break;
+            case 6:
+                flowersToCollect = new() { FlowerColor.RED, FlowerColor.RED, FlowerColor.BLUE };
+                break;
+            case 7:
+                flowersToCollect = new() { FlowerColor.PINK };
+                break;
+            case 8:
+                flowersToCollect = new() { FlowerColor.PINK, FlowerColor.PINK, FlowerColor.RED, FlowerColor.RED, FlowerColor.BLUE, FlowerColor.BLUE };
+                break;
+            case 9:
+                flowersToCollect = new() { FlowerColor.RED };
+                break;
             default:
                 Debug.Log("Scene is not a level");
                 break;
