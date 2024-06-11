@@ -35,13 +35,16 @@ public class Flower : MonoBehaviour
             gameManager.NotifyFlowerEntered(flowerColor);
             audioManager.PlaySFX(AudioClipType.FlowerEntered);
 
-            Transform particleTransform = transform.Find("ParticlesPollinated");
+            //Transform particleTransform = transform.Find("ParticlesPollinated");
+            Transform particleTransform = transform.Find("flower_zwin");
             if (particleTransform != null)
             {
                 GameObject particles = particleTransform.gameObject;
 
                 particles.SetActive(true);
             }
+            GameObject flowerImage = transform.Find($"flower_{flowerColor.ToString().ToLower()}").gameObject;
+            flowerImage.SetActive(false);
 
             // Position the bee at the center of the flower
             Rigidbody2D beeRigidbody = other.GetComponent<Rigidbody2D>();
