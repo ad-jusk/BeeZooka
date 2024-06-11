@@ -59,7 +59,10 @@ public class UiManager : Singleton<UiManager>
         }
         else
         {
-            tutorialCanvas.SetActive(true);
+            if(tutorialCanvas != null)
+            {
+                tutorialCanvas.SetActive(true);
+            }
         }
     }
 
@@ -184,7 +187,10 @@ public class UiManager : Singleton<UiManager>
 
         targetImage.fillAmount = 0f;
         toDoCanvas.SetActive(false);
-        tutorialCanvas.SetActive(true);
+        if(tutorialCanvas != null) 
+        {
+            tutorialCanvas.SetActive(true);
+        }
     }
 
     private IEnumerator WaitForAnimationToFinish()
