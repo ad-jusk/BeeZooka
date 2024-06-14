@@ -124,8 +124,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.35, y: -0.05}
-  m_Size: {x: 1, y: 1.2}
+  m_Offset: {x: 0.18, y: -0.14}
+  m_Size: {x: 0.55, y: 1.05}
   m_Direction: 0
 --- !u!70 &1539208426288562321
 CapsuleCollider2D:
@@ -156,12 +156,12 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.12, y: 0.49}
-  m_Size: {x: 0.45, y: 0.49}
-  m_Direction: 0
+  m_Offset: {x: -0.05, y: 0.43}
+  m_Size: {x: 0.3, y: 0.29}
+  m_Direction: 1
 --- !u!114 &840326773284868442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3442c1049998f8e4eb551078d634fe37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObstacleAnimator: {fileID: 0}
+  ObstacleAnimator: {fileID: 6129174584576833681}
   Type: 4
 --- !u!95 &6129174584576833681
 Animator:
@@ -207,6 +207,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8685042599208835518}
   - component: {fileID: 3190941456803603755}
+  - component: {fileID: 8386646068363157310}
   m_Layer: 0
   m_Name: smoker_pomp
   m_TagString: Untagged
@@ -281,6 +282,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8386646068363157310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4603644905369990088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3442c1049998f8e4eb551078d634fe37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObstacleAnimator: {fileID: 0}
+  Type: 4
 --- !u!1 &7644335347398502221
 GameObject:
   m_ObjectHideFlags: 0
@@ -5205,6 +5220,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5625799717114465821}
   - component: {fileID: 2463516824974576805}
+  - component: {fileID: 8958759368859270793}
+  - component: {fileID: 3518105231772260233}
   m_Layer: 0
   m_Name: smoker_backp
   m_TagString: Untagged
@@ -5279,3 +5296,64 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!68 &8958759368859270793
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8997431477556796878}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.04, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.35332626, y: 2.6610074}
+  - {x: 1.2905402, y: 3.6088727}
+  - {x: 3.3963041, y: 2.450017}
+  - {x: 2.3643243, y: -3.0790987}
+  - {x: 2.2540448, y: -3.1723237}
+  - {x: 1.655395, y: -3.4929922}
+  - {x: 1.5281103, y: -3.5895135}
+  - {x: 0.7950691, y: -3.1333976}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
+--- !u!114 &3518105231772260233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8997431477556796878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3442c1049998f8e4eb551078d634fe37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObstacleAnimator: {fileID: 0}
+  Type: 4

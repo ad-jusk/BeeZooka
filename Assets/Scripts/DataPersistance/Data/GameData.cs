@@ -1,3 +1,5 @@
+using System.Linq;
+
 [System.Serializable]
 public class GameData
 {
@@ -16,6 +18,8 @@ public class GameData
 
     public override string ToString()
     {
-        return "GameData: music enabled: " + musicEnabled + ", sfx enabled: " + sfxEnabled + ", levels cleared: " + levelsCleared;
+        string collectablesInfo = string.Join(", ", levelIndexToCollectables.Select(kvp => $"Level {kvp.Key}: {kvp.Value} collectibles"));
+
+        return $"GameData: music enabled: {musicEnabled}, sfx enabled: {sfxEnabled}, levels cleared: {levelsCleared}, Collectibles per level: {(collectablesInfo.Length > 0 ? collectablesInfo : "None")}";
     }
 }

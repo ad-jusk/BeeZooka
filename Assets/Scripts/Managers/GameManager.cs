@@ -24,6 +24,8 @@ public class GameManager : Singleton<GameManager>
     public event NextLevelButtonClicked OnNextLevelButtonClicked;
     public delegate void HomeButtonClicked();
     public event HomeButtonClicked OnHomeButtonClicked;
+    public delegate void CollectibleCollected();
+    public event CollectibleCollected OnCollectibleCollected;
 
     public delegate void FlowerEntered(FlowerColor flowerColor);
     public event FlowerEntered OnFlowerEntered;
@@ -35,6 +37,7 @@ public class GameManager : Singleton<GameManager>
 
     public List<FlowerColor> flowersToCollect;
     public List<FlowerColor> collectedFlowers;
+    public int collectedCollectibles;
 
     #endregion
 
@@ -75,6 +78,7 @@ public class GameManager : Singleton<GameManager>
                 break;
         }
         collectedFlowers = new();
+        collectedCollectibles = 0;
     }
 
     public void NotifyBeehiveEntered()
@@ -122,7 +126,10 @@ public class GameManager : Singleton<GameManager>
         collectedFlowers.Add(flowerColor);
         OnFlowerEntered?.Invoke(flowerColor);
     }
-
+    public void NotifyCollectibleCollected()
+    {
+        collectedCollectibles++;
+    }
     public bool AllFlowersCollected()
     {
         if (collectedFlowers.Count == 0)

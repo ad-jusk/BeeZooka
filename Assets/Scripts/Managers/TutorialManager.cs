@@ -25,13 +25,18 @@ public class TutorialManager : MonoBehaviour
 
     private void HandleFlowerEntered(FlowerColor flowerColor)
     {
-        handImage.SetActive(false);
-        textList[textIteration].SetActive(false);
-        textIteration++;
-        textList[textIteration].SetActive(true);
-        if(textIteration == 2)
+        if (handImage != null) handImage.SetActive(false);
+
+        if (textIteration < textList.Count && textList[textIteration] != null)
         {
-            arrowImage.SetActive(true);
+            textList[textIteration].SetActive(false);
+        }
+
+        textIteration++;
+
+        if (textIteration < textList.Count && textList[textIteration] != null)
+        {
+            textList[textIteration].SetActive(true);
         }
     }
 }

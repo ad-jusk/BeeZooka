@@ -45,5 +45,19 @@ public class Beehive : MonoBehaviour, IDataPersistance
         {
             data.levelsCleared += 1;
         }
+
+        int collectibleCount = GetCollectibleCountForCurrentLevel();
+        if (data.levelIndexToCollectables.ContainsKey(currentLevel) && data.levelIndexToCollectables[currentLevel] < collectibleCount)
+        {
+            data.levelIndexToCollectables[currentLevel] = collectibleCount;
+        }
+        else
+        {
+            data.levelIndexToCollectables.Add(currentLevel, collectibleCount);
+        }
+    }
+    private int GetCollectibleCountForCurrentLevel()
+    {
+        return gameManager.collectedCollectibles;
     }
 }

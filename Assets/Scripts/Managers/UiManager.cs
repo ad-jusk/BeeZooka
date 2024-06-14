@@ -68,6 +68,10 @@ public class UiManager : Singleton<UiManager>
 
     public void LevelCleared()
     {
+        if (pauseMenu.activeSelf)
+        {
+            pauseMenu.SetActive(false);
+        }
         WinMenu.SetActive(true);
         WinMenuSound();
     }
