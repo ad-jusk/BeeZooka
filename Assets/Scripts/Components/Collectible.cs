@@ -14,17 +14,14 @@ public class Collectible : MonoBehaviour
         audioManager = AudioManager.Instance;
     }
 
-    // Using OnTriggerEnter2D instead of OnCollisionEnter2D for entering flower
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Bee"))
         {
             Debug.Log("collectible");
             audioManager.PlaySFX(AudioClipType.FlowerEntered);
-            //Transform particleTransform = transform.Find("ParticlesPollinated");
             gameObject.SetActive(false);
             gameManager.NotifyCollectibleCollected();
         }
     }
-
 }
