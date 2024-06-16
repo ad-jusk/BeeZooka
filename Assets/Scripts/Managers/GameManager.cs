@@ -24,6 +24,8 @@ public class GameManager : Singleton<GameManager>
     public event NextLevelButtonClicked OnNextLevelButtonClicked;
     public delegate void HomeButtonClicked();
     public event HomeButtonClicked OnHomeButtonClicked;
+    public delegate void SelectLevelButtonClicked();
+    public event SelectLevelButtonClicked OnSelectLevelButtonClicked; 
     public delegate void FlowerEntered(FlowerColor flowerColor);
     public event FlowerEntered OnFlowerEntered;
 
@@ -69,6 +71,9 @@ public class GameManager : Singleton<GameManager>
                 break;
             case 9:
                 flowersToCollect = new() { FlowerColor.RED };
+                break;
+            case 10:
+                flowersToCollect = new() { FlowerColor.RED, FlowerColor.BLUE};
                 break;
             default:
                 Debug.Log("Scene is not a level");
@@ -128,7 +133,10 @@ public class GameManager : Singleton<GameManager>
     {
         collectedCollectibles++;
     }
-
+    public void NotifySelectLevelButtonClicked()
+    {
+        OnSelectLevelButtonClicked?.Invoke();
+    }
     public bool AllFlowersCollected()
     {
         if (collectedFlowers.Count == 0)

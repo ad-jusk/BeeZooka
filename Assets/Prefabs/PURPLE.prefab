@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f624587f214e137469697f0eb440daab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flowerColor: 3
+  flowerColor: 1
 --- !u!58 &3452839508562048949
 CircleCollider2D:
   m_ObjectHideFlags: 0

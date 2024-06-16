@@ -51,7 +51,7 @@ public class LevelBoard : MonoBehaviour, IDataPersistance
                 {
                     for (int i = 1; i <= score; i++)
                     {
-                        collectibles.transform.Find("Uncollected" + i).gameObject.SetActive(false);
+                        collectibles.transform.Find("Collected" + i).gameObject.SetActive(true);
                     }
                 }
             }

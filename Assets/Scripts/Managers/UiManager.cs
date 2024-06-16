@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 [DefaultExecutionOrder(-1)]
@@ -45,6 +46,7 @@ public class UiManager : Singleton<UiManager>
         gameManager.OnResumeButtonClicked += HandleResumeButtonClicked;
         gameManager.OnRestartButtonClicked += HandleRestartButtonClicked;
         gameManager.OnHomeButtonClicked += HandleHomeButtonClicked;
+        gameManager.OnSelectLevelButtonClicked += HandleSelectLevelButtonClicked;
 
         inputManager.OnEscapePressed += HandlePauseButtonClicked;
     }
@@ -66,7 +68,7 @@ public class UiManager : Singleton<UiManager>
         }
     }
 
-    public void LevelCleared()
+    public void LevelCleared(int score)
     {
         if (pauseMenu.activeSelf)
         {
@@ -74,7 +76,9 @@ public class UiManager : Singleton<UiManager>
         }
         WinMenu.SetActive(true);
         WinMenuSound();
+        StartCoroutine(CollectiblesCollected(score));
     }
+
 
     private void HandleFlowerEntered(FlowerColor flowerColor)
     {
@@ -154,7 +158,10 @@ public class UiManager : Singleton<UiManager>
     {
         audioManager.PlayMusic();
     }
-
+    private void HandleSelectLevelButtonClicked()
+    {
+        audioManager.PlayMusic();
+    }
     private void PlaySFX(int type)
     {
         if (audioManager != null)
@@ -203,6 +210,17 @@ public class UiManager : Singleton<UiManager>
         lostMenu.SetActive(true);
     }
 
+    private IEnumerator CollectiblesCollected(int score)
+    {
+        GameObject collectibles = WinMenu.transform.Find("Collectibles").gameObject;
+        yield return new WaitForSeconds(0.5f);
+        for (int i = 1; i <= score; i++)
+        {
+            yield return new WaitForSeconds(0.3f);
+            collectibles.transform.Find("Collected" + i).gameObject.SetActive(true);
+            collectibles.transform.Find("Collected" + i).GetComponent<Animation>().Play();
+        }
+    }
     private void WinMenuSound()
     {
         audioManager.ChangeMusicVolume(0.5f);

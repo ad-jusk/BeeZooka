@@ -23,7 +23,7 @@ public class Beehive : MonoBehaviour, IDataPersistance
 
         if (levelCleared)
         {
-            uiManager.LevelCleared();
+            uiManager.LevelCleared(gameManager.collectedCollectibles);
             Rigidbody2D beeRigidbody = other.GetComponent<Rigidbody2D>();
             beeRigidbody.velocity = Vector2.zero;
             beeRigidbody.position = transform.GetComponent<Renderer>().bounds.center;

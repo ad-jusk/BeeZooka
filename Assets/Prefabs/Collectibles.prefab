@@ -11,13 +11,14 @@ GameObject:
   - component: {fileID: 6660392146237786329}
   - component: {fileID: 8701213000621232590}
   - component: {fileID: 3382575190166507505}
+  - component: {fileID: 4986101810741399310}
   m_Layer: 5
   m_Name: Collected3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6660392146237786329
 RectTransform:
   m_ObjectHideFlags: 0
@@ -76,6 +77,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!111 &4986101810741399310
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194749983000608271}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 9423330616d83f04ab12251b30b2a0d5, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 9423330616d83f04ab12251b30b2a0d5, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &2071652070023568614
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4566037, g: 0.4566037, b: 0.4566037, a: 1}
+  m_Color: {r: 0.78867924, g: 0.51636165, b: 0.51636165, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -313,13 +330,14 @@ GameObject:
   - component: {fileID: 2634211553488923977}
   - component: {fileID: 423676802065613510}
   - component: {fileID: 6207251536982752330}
+  - component: {fileID: 7115281407524213212}
   m_Layer: 5
   m_Name: Collected2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2634211553488923977
 RectTransform:
   m_ObjectHideFlags: 0
@@ -378,6 +396,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!111 &7115281407524213212
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3262182124430004886}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 9423330616d83f04ab12251b30b2a0d5, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 9423330616d83f04ab12251b30b2a0d5, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &3610722752484884669
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,7 +622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.45882353, g: 0.45882353, b: 0.45882353, a: 1}
+  m_Color: {r: 0.7921569, g: 0.5176471, b: 0.5176471, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -708,12 +742,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 615744264961781019}
-  - {fileID: 2634211553488923977}
-  - {fileID: 6660392146237786329}
   - {fileID: 2648719567033017227}
   - {fileID: 1546559734916751649}
   - {fileID: 5867175277482894766}
+  - {fileID: 615744264961781019}
+  - {fileID: 2634211553488923977}
+  - {fileID: 6660392146237786329}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -732,13 +766,14 @@ GameObject:
   - component: {fileID: 615744264961781019}
   - component: {fileID: 6437913697859736919}
   - component: {fileID: 6580786254681106303}
+  - component: {fileID: 15518861836603927}
   m_Layer: 5
   m_Name: Collected1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &615744264961781019
 RectTransform:
   m_ObjectHideFlags: 0
@@ -797,6 +832,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!111 &15518861836603927
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6923742567820109063}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 9423330616d83f04ab12251b30b2a0d5, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 9423330616d83f04ab12251b30b2a0d5, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &8081454812038245138
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,7 +906,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.45882353, g: 0.45882353, b: 0.45882353, a: 1}
+  m_Color: {r: 0.7921569, g: 0.5176471, b: 0.5176471, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
