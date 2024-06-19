@@ -14,6 +14,11 @@ TagManager:
   - 5
   - wasp
   - ProgressBar
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
   layers:
   - Default
   - TransparentFX

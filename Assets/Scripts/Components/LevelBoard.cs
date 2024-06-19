@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class LevelBoard : MonoBehaviour, IDataPersistance
 {
     private int levelsCleared;
+    private SerializableDictionary<int,int> levelIndexToCollectables;
     private List<Button> levelButtons;
 
     private void OnEnable()
@@ -17,6 +18,7 @@ public class LevelBoard : MonoBehaviour, IDataPersistance
     public void LoadData(GameData data)
     {
         levelsCleared = data.levelsCleared;
+        levelIndexToCollectables = data.levelIndexToCollectables;
         DisableLockedLevels();
     }
 
@@ -34,9 +36,24 @@ public class LevelBoard : MonoBehaviour, IDataPersistance
         {
             try
             {
+                GameObject collectibles = button.transform.Find("Collectibles").gameObject;
+
+
                 // EACH LEVEL BUTTON NEEDS TO HAVE A CORRESPONDING TAG THAT CAN BE PARSED TO INT
                 int levelIndex = int.Parse(button.tag);
+                int score = 0;
+                if (levelIndexToCollectables != null && levelIndexToCollectables.ContainsKey(levelIndex))
+                {
+                    score = levelIndexToCollectables[levelIndex];
+                }
                 button.interactable = levelIndex <= unlockedLevels;
+                if (collectibles != null && score != 0)
+                {
+                    for (int i = 1; i <= score; i++)
+                    {
+                        collectibles.transform.Find("Collected" + i).gameObject.SetActive(true);
+                    }
+                }
             }
             catch (FormatException)
             {

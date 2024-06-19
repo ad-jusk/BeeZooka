@@ -23,7 +23,7 @@ public class Beehive : MonoBehaviour, IDataPersistance
 
         if (levelCleared)
         {
-            uiManager.LevelCleared();
+            uiManager.LevelCleared(gameManager.collectedCollectibles);
             Rigidbody2D beeRigidbody = other.GetComponent<Rigidbody2D>();
             beeRigidbody.velocity = Vector2.zero;
             beeRigidbody.position = transform.GetComponent<Renderer>().bounds.center;
@@ -44,6 +44,19 @@ public class Beehive : MonoBehaviour, IDataPersistance
         if (levelCleared && currentLevel == data.levelsCleared + 1)
         {
             data.levelsCleared += 1;
+        }
+
+        int collectibleCount = gameManager.collectedCollectibles;
+        if (data.levelIndexToCollectables.ContainsKey(currentLevel))
+        {
+            if(data.levelIndexToCollectables[currentLevel] < collectibleCount)
+            {
+                data.levelIndexToCollectables[currentLevel] = collectibleCount;
+            }
+        }
+        else
+        {
+            data.levelIndexToCollectables.Add(currentLevel, collectibleCount);
         }
     }
 }

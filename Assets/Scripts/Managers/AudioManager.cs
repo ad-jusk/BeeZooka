@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -143,24 +141,24 @@ public class AudioManager : MonoBehaviour, IDataPersistance
             SFXSource.volume = 0f;
         }
     }
+
     public void ChangeMusicVolume(float volume)
     {
         audioSource.volume = volume;
     }
-    public IEnumerator ChangeVolumeByTime(float seconds, float startVolume, float endVolume)
-    {
-        //yield return new WaitForSeconds(seconds);
-        float duration = seconds;
-        float elapsed = 0f;
 
-        while (elapsed < duration)
+    public void ResetVolumes()
+    {
+        if (audioSource.volume != masterVolumeMusic)
         {
-            elapsed += Time.deltaTime;
-            ChangeMusicVolume( Mathf.Lerp(startVolume, endVolume, elapsed / duration));
-            yield return null;
+            audioSource.volume = masterVolumeMusic;
         }
-        //WinMenuSound(1.0f);
+        if (SFXSource.volume != masterVolumeSfx)
+        {
+            SFXSource.volume = masterVolumeSfx;
+        }
     }
+
     private void RegisterAudioSource(AudioSource source, float masterVolume)
     {
         if (source != null && !audioSources.Contains(source))

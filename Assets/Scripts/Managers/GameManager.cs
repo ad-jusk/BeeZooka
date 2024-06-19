@@ -24,7 +24,8 @@ public class GameManager : Singleton<GameManager>
     public event NextLevelButtonClicked OnNextLevelButtonClicked;
     public delegate void HomeButtonClicked();
     public event HomeButtonClicked OnHomeButtonClicked;
-
+    public delegate void SelectLevelButtonClicked();
+    public event SelectLevelButtonClicked OnSelectLevelButtonClicked; 
     public delegate void FlowerEntered(FlowerColor flowerColor);
     public event FlowerEntered OnFlowerEntered;
 
@@ -35,6 +36,7 @@ public class GameManager : Singleton<GameManager>
 
     public List<FlowerColor> flowersToCollect;
     public List<FlowerColor> collectedFlowers;
+    public int collectedCollectibles;
 
     #endregion
 
@@ -49,11 +51,36 @@ public class GameManager : Singleton<GameManager>
             case 2:
                 flowersToCollect = new() { FlowerColor.RED, FlowerColor.PINK, FlowerColor.BLUE };
                 break;
+            case 3:
+                flowersToCollect = new() { FlowerColor.RED, FlowerColor.RED, FlowerColor.BLUE };
+                break;
+            case 4:
+                flowersToCollect = new() { FlowerColor.RED, FlowerColor.RED, FlowerColor.RED, FlowerColor.RED };
+                break;
+            case 5:
+                flowersToCollect = new() { FlowerColor.BLUE, FlowerColor.PINK };
+                break;
+            case 6:
+                flowersToCollect = new() { FlowerColor.RED, FlowerColor.RED, FlowerColor.BLUE };
+                break;
+            case 7:
+                flowersToCollect = new() { FlowerColor.PINK };
+                break;
+            case 8:
+                flowersToCollect = new() { FlowerColor.PINK, FlowerColor.PINK, FlowerColor.RED, FlowerColor.RED, FlowerColor.BLUE, FlowerColor.BLUE };
+                break;
+            case 9:
+                flowersToCollect = new() { FlowerColor.RED };
+                break;
+            case 10:
+                flowersToCollect = new() { FlowerColor.RED, FlowerColor.BLUE};
+                break;
             default:
                 Debug.Log("Scene is not a level");
                 break;
         }
         collectedFlowers = new();
+        collectedCollectibles = 0;
     }
 
     public void NotifyBeehiveEntered()
@@ -102,9 +129,17 @@ public class GameManager : Singleton<GameManager>
         OnFlowerEntered?.Invoke(flowerColor);
     }
 
+    public void NotifyCollectibleCollected()
+    {
+        collectedCollectibles++;
+    }
+    public void NotifySelectLevelButtonClicked()
+    {
+        OnSelectLevelButtonClicked?.Invoke();
+    }
     public bool AllFlowersCollected()
     {
-        if (flowersToCollect.Count != collectedFlowers.Count)
+        if (collectedFlowers.Count == 0)
         {
             return false;
         }
@@ -128,10 +163,6 @@ public class GameManager : Singleton<GameManager>
             if (itemCounts.ContainsKey(s))
             {
                 itemCounts[s]--;
-            }
-            else
-            {
-                return false;
             }
         }
         return itemCounts.Values.All(c => c == 0);
