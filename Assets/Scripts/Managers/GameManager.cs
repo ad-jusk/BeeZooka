@@ -28,7 +28,8 @@ public class GameManager : Singleton<GameManager>
     public event SelectLevelButtonClicked OnSelectLevelButtonClicked; 
     public delegate void FlowerEntered(FlowerColor flowerColor);
     public event FlowerEntered OnFlowerEntered;
-
+    public delegate void FlowersCollected();
+    public event FlowersCollected OnFlowersCollected;
     #endregion
 
 
@@ -137,6 +138,10 @@ public class GameManager : Singleton<GameManager>
     {
         OnSelectLevelButtonClicked?.Invoke();
     }
+    public void NotifyAllFlowersCollected()
+    {
+        OnFlowersCollected?.Invoke();
+    }
     public bool AllFlowersCollected()
     {
         if (collectedFlowers.Count == 0)
@@ -165,6 +170,11 @@ public class GameManager : Singleton<GameManager>
                 itemCounts[s]--;
             }
         }
-        return itemCounts.Values.All(c => c == 0);
+        bool allCollected = itemCounts.Values.All(c => c == 0);
+        if (allCollected)
+        {
+            NotifyAllFlowersCollected();
+        }
+        return allCollected;
     }
 }

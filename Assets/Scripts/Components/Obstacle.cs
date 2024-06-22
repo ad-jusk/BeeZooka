@@ -57,6 +57,9 @@ public class Obstacle : MonoBehaviour
             case ObstacleType.SMOKER:
                 HandleSmokeObstacleInteraction(beeRigidbody);
                 break;
+            case ObstacleType.BOTTOM:
+                HandleBottomObstacleInteraction(beeRigidbody);
+                break;
         }
     }
 
@@ -90,6 +93,12 @@ public class Obstacle : MonoBehaviour
         }
     }
 
+    private void HandleBottomObstacleInteraction(Rigidbody2D beeRigidbody)
+    {
+        Animator beeAnimator = beeRigidbody.GetComponent<Animator>();
+        beeAnimator.SetBool("isStuck", true);
+
+    }
     private IEnumerator ChangeObstacleColorGradually(SpriteRenderer spriteRenderer, Color targetColor, float duration)
     {
         Color initialColor = spriteRenderer.color;

@@ -4,5 +4,6 @@ public enum ObstacleType
     WASP,
     MITE,
     BULDOZER,
-    SMOKER
+    SMOKER,
+    BOTTOM
 };
