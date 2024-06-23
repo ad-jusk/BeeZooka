@@ -30,6 +30,7 @@ public class Beehive : MonoBehaviour, IDataPersistance
 
             if (levelCleared)
             {
+                gameManager.NotifyBeehiveEntered();
                 uiManager.LevelCleared(gameManager.collectedCollectibles);
                 Rigidbody2D beeRigidbody = other.GetComponent<Rigidbody2D>();
                 beeRigidbody.velocity = Vector2.zero;

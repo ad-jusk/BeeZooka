@@ -39,6 +39,7 @@ public class Bee : MonoBehaviour
         gameManager.OnObstacleEntered += HandleObstacleEntered;
         gameManager.OnPauseButtonClicked += HandlePauseButtonClicked;
         gameManager.OnResumeButtonClicked += HandleResumeButtonClicked;
+        gameManager.OnBeehiveEntered += HandleGameWon;
     }
 
     private void SetSpriteSwipeable(bool isSwipeable)
@@ -60,7 +61,10 @@ public class Bee : MonoBehaviour
     {
         SetSpriteSwipeable(false);
     }
-
+    private void HandleGameWon()
+    {
+        SetSpriteSwipeable(false);
+    }
     private void HandleResumeButtonClicked()
     {
         SetSpriteSwipeable(true);

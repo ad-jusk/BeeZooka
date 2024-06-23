@@ -40,9 +40,13 @@ public class GameManager : Singleton<GameManager>
     public int collectedCollectibles;
 
     #endregion
+    private AudioManager audioManager;
+    [SerializeField]
+    private bool hasPlayedSound = false;
 
     private void Awake()
     {
+        audioManager = AudioManager.Instance;
         int levelIndex = LevelIndexFromSceneExtractor.GetLevelIndex(SceneManager.GetActiveScene().name);
         switch (levelIndex)
         {
@@ -97,6 +101,11 @@ public class GameManager : Singleton<GameManager>
     public void NotifyObstacleEntered()
     {
         OnObstacleEntered?.Invoke();
+        if (!hasPlayedSound)
+        {
+            hasPlayedSound = true;
+            audioManager.PlaySFX(AudioClipType.ObstacleHit);
+        }
     }
 
     public void NotifyPauseButtonClicked()

@@ -10,7 +10,7 @@ public class Obstacle : MonoBehaviour
     private GameManager gameManager;
     private AudioManager audioManager;
     private Collider2D beeCollider;
-    private bool hasPlayedSound = false;
+    //private bool hasPlayedSound = false;
 
     private void Awake()
     {
@@ -21,12 +21,9 @@ public class Obstacle : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Bee") && !hasPlayedSound)
+        if (other.CompareTag("Bee"))
         {
-            hasPlayedSound = true;
-
             gameManager.NotifyObstacleEntered();
-            audioManager.PlaySFX(AudioClipType.ObstacleHit);
 
             Debug.Log("Obstacle hit");
 
