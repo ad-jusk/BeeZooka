@@ -27,6 +27,7 @@ public class AudioManager : MonoBehaviour, IDataPersistance
     private bool sfxEnabled = true;
     private float obstacleSoundCooldown = 1.0f; // Cooldown time in seconds
     private float lastObstacleSoundTime = -0.5f;
+
     private void Awake()
     {
         if (Instance == null)

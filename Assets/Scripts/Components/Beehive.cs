@@ -17,17 +17,17 @@ public class Beehive : MonoBehaviour, IDataPersistance
         dataManager = DataManager.Instance;
         beehiveEffect = gameObject.transform.Find("hive_effect").gameObject;
     }
+
     private void FixedUpdate()
     {
         levelCleared = gameManager.AllFlowersCollected();
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         //levelCleared = gameManager.AllFlowersCollected();
         if (other.CompareTag("Bee"))
         {
-            Debug.Log(levelCleared ? "LEVEL CLEARED" : "LEVEL FAILED");
-
             if (levelCleared)
             {
                 gameManager.NotifyBeehiveEntered();
@@ -58,7 +58,7 @@ public class Beehive : MonoBehaviour, IDataPersistance
         int collectibleCount = gameManager.collectedCollectibles;
         if (data.levelIndexToCollectables.ContainsKey(currentLevel))
         {
-            if(data.levelIndexToCollectables[currentLevel] < collectibleCount)
+            if (data.levelIndexToCollectables[currentLevel] < collectibleCount)
             {
                 data.levelIndexToCollectables[currentLevel] = collectibleCount;
             }
@@ -68,6 +68,7 @@ public class Beehive : MonoBehaviour, IDataPersistance
             data.levelIndexToCollectables.Add(currentLevel, collectibleCount);
         }
     }
+
     private void HandleAllFlowersCollected()
     {
         beehiveEffect.SetActive(true);

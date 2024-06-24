@@ -3709,7 +3709,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &860305364
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5616,6 +5616,7 @@ MonoBehaviour:
   flowersToCollect: 0000000002000000
   collectedFlowers: 
   collectedCollectibles: 0
+  hasPlayedSound: 0
 --- !u!1 &1400873041
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class LevelBoard : MonoBehaviour, IDataPersistance
 {
     private int levelsCleared;
-    private SerializableDictionary<int,int> levelIndexToCollectables;
+    private SerializableDictionary<int, int> levelIndexToCollectables;
     private List<Button> levelButtons;
 
     private void OnEnable()
@@ -37,7 +37,6 @@ public class LevelBoard : MonoBehaviour, IDataPersistance
             try
             {
                 GameObject collectibles = button.transform.Find("Collectibles").gameObject;
-
 
                 // EACH LEVEL BUTTON NEEDS TO HAVE A CORRESPONDING TAG THAT CAN BE PARSED TO INT
                 int levelIndex = int.Parse(button.tag);

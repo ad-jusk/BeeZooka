@@ -10,6 +10,7 @@ public class Obstacle : MonoBehaviour
     private GameManager gameManager;
     private AudioManager audioManager;
     private Collider2D beeCollider;
+
     //private bool hasPlayedSound = false;
 
     private void Awake()
@@ -31,7 +32,7 @@ public class Obstacle : MonoBehaviour
 
             beeRigidbody.velocity = Vector2.zero;
             beeRigidbody.rotation = 0;
-            if(this.Type != ObstacleType.SMOKER)
+            if (this.Type != ObstacleType.SMOKER)
             {
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
@@ -94,8 +95,8 @@ public class Obstacle : MonoBehaviour
     {
         Animator beeAnimator = beeRigidbody.GetComponent<Animator>();
         beeAnimator.SetBool("isStuck", true);
-
     }
+
     private IEnumerator ChangeObstacleColorGradually(SpriteRenderer spriteRenderer, Color targetColor, float duration)
     {
         Color initialColor = spriteRenderer.color;

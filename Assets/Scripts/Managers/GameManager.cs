@@ -10,8 +10,6 @@ public class GameManager : Singleton<GameManager>
 
     public delegate void BeehiveEntered();
     public event BeehiveEntered OnBeehiveEntered;
-    public delegate void BeehiveMissed();
-    public event BeehiveMissed OnBeehiveMissed;
     public delegate void ObstacleEntered();
     public event ObstacleEntered OnObstacleEntered;
     public delegate void PauseButtonClicked();
@@ -25,7 +23,7 @@ public class GameManager : Singleton<GameManager>
     public delegate void HomeButtonClicked();
     public event HomeButtonClicked OnHomeButtonClicked;
     public delegate void SelectLevelButtonClicked();
-    public event SelectLevelButtonClicked OnSelectLevelButtonClicked; 
+    public event SelectLevelButtonClicked OnSelectLevelButtonClicked;
     public delegate void FlowerEntered(FlowerColor flowerColor);
     public event FlowerEntered OnFlowerEntered;
     public delegate void FlowersCollected();
@@ -41,6 +39,7 @@ public class GameManager : Singleton<GameManager>
 
     #endregion
     private AudioManager audioManager;
+
     [SerializeField]
     private bool hasPlayedSound = false;
 
@@ -78,7 +77,7 @@ public class GameManager : Singleton<GameManager>
                 flowersToCollect = new() { FlowerColor.RED };
                 break;
             case 10:
-                flowersToCollect = new() { FlowerColor.RED, FlowerColor.BLUE};
+                flowersToCollect = new() { FlowerColor.RED, FlowerColor.BLUE };
                 break;
             default:
                 Debug.Log("Scene is not a level");
@@ -91,11 +90,6 @@ public class GameManager : Singleton<GameManager>
     public void NotifyBeehiveEntered()
     {
         OnBeehiveEntered?.Invoke();
-    }
-
-    public void NotifyBeehiveMissed()
-    {
-        OnBeehiveMissed?.Invoke();
     }
 
     public void NotifyObstacleEntered()
@@ -143,14 +137,17 @@ public class GameManager : Singleton<GameManager>
     {
         collectedCollectibles++;
     }
+
     public void NotifySelectLevelButtonClicked()
     {
         OnSelectLevelButtonClicked?.Invoke();
     }
+
     public void NotifyAllFlowersCollected()
     {
         OnFlowersCollected?.Invoke();
     }
+
     public bool AllFlowersCollected()
     {
         if (collectedFlowers.Count == 0)
