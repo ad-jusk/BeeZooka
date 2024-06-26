@@ -25,6 +25,8 @@ public class AudioManager : MonoBehaviour, IDataPersistance
     private float masterVolumeSfx = 0.7f;
     private bool musicEnabled = true;
     private bool sfxEnabled = true;
+    private float obstacleSoundCooldown = 1.0f; // Cooldown time in seconds
+    private float lastObstacleSoundTime = -0.5f;
 
     private void Awake()
     {
@@ -92,7 +94,12 @@ public class AudioManager : MonoBehaviour, IDataPersistance
                 SFXSource.PlayOneShot(touchFlowerClip);
                 break;
             case AudioClipType.GameOver:
-                SFXSource.PlayOneShot(gameOverClip);
+                float currentTime = Time.time;
+                if (currentTime >= lastObstacleSoundTime + obstacleSoundCooldown)
+                {
+                    lastObstacleSoundTime = currentTime;
+                    SFXSource.PlayOneShot(gameOverClip);
+                }
                 break;
             case AudioClipType.ObstacleHit:
                 SFXSource.PlayOneShot(obstacleHitClip);

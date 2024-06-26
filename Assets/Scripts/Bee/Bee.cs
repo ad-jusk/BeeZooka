@@ -35,20 +35,15 @@ public class Bee : MonoBehaviour
     {
         swipeHandler.Initialize(rigidBody, minimumSwipeDistance, maximumSwipeTime, swipeStrength);
 
-        gameManager.OnBeehiveMissed += HandleOnBeehiveMissed;
         gameManager.OnObstacleEntered += HandleObstacleEntered;
         gameManager.OnPauseButtonClicked += HandlePauseButtonClicked;
         gameManager.OnResumeButtonClicked += HandleResumeButtonClicked;
+        gameManager.OnBeehiveEntered += HandleGameWon;
     }
 
     private void SetSpriteSwipeable(bool isSwipeable)
     {
         swipeHandler.IsSwipeable = isSwipeable;
-    }
-
-    private void HandleOnBeehiveMissed()
-    {
-        SetSpriteSwipeable(false);
     }
 
     private void HandleObstacleEntered()
@@ -57,6 +52,11 @@ public class Bee : MonoBehaviour
     }
 
     private void HandlePauseButtonClicked()
+    {
+        SetSpriteSwipeable(false);
+    }
+
+    private void HandleGameWon()
     {
         SetSpriteSwipeable(false);
     }

@@ -10,8 +10,6 @@ public class GameManager : Singleton<GameManager>
 
     public delegate void BeehiveEntered();
     public event BeehiveEntered OnBeehiveEntered;
-    public delegate void BeehiveMissed();
-    public event BeehiveMissed OnBeehiveMissed;
     public delegate void ObstacleEntered();
     public event ObstacleEntered OnObstacleEntered;
     public delegate void PauseButtonClicked();
@@ -25,10 +23,11 @@ public class GameManager : Singleton<GameManager>
     public delegate void HomeButtonClicked();
     public event HomeButtonClicked OnHomeButtonClicked;
     public delegate void SelectLevelButtonClicked();
-    public event SelectLevelButtonClicked OnSelectLevelButtonClicked; 
+    public event SelectLevelButtonClicked OnSelectLevelButtonClicked;
     public delegate void FlowerEntered(FlowerColor flowerColor);
     public event FlowerEntered OnFlowerEntered;
-
+    public delegate void FlowersCollected();
+    public event FlowersCollected OnFlowersCollected;
     #endregion
 
 
@@ -39,9 +38,14 @@ public class GameManager : Singleton<GameManager>
     public int collectedCollectibles;
 
     #endregion
+    private AudioManager audioManager;
+
+    [SerializeField]
+    private bool hasPlayedSound = false;
 
     private void Awake()
     {
+        audioManager = AudioManager.Instance;
         int levelIndex = LevelIndexFromSceneExtractor.GetLevelIndex(SceneManager.GetActiveScene().name);
         switch (levelIndex)
         {
@@ -73,7 +77,7 @@ public class GameManager : Singleton<GameManager>
                 flowersToCollect = new() { FlowerColor.RED };
                 break;
             case 10:
-                flowersToCollect = new() { FlowerColor.RED, FlowerColor.BLUE};
+                flowersToCollect = new() { FlowerColor.RED, FlowerColor.BLUE };
                 break;
             default:
                 Debug.Log("Scene is not a level");
@@ -88,14 +92,14 @@ public class GameManager : Singleton<GameManager>
         OnBeehiveEntered?.Invoke();
     }
 
-    public void NotifyBeehiveMissed()
-    {
-        OnBeehiveMissed?.Invoke();
-    }
-
     public void NotifyObstacleEntered()
     {
         OnObstacleEntered?.Invoke();
+        if (!hasPlayedSound)
+        {
+            hasPlayedSound = true;
+            audioManager.PlaySFX(AudioClipType.ObstacleHit);
+        }
     }
 
     public void NotifyPauseButtonClicked()
@@ -133,10 +137,17 @@ public class GameManager : Singleton<GameManager>
     {
         collectedCollectibles++;
     }
+
     public void NotifySelectLevelButtonClicked()
     {
         OnSelectLevelButtonClicked?.Invoke();
     }
+
+    public void NotifyAllFlowersCollected()
+    {
+        OnFlowersCollected?.Invoke();
+    }
+
     public bool AllFlowersCollected()
     {
         if (collectedFlowers.Count == 0)
@@ -165,6 +176,11 @@ public class GameManager : Singleton<GameManager>
                 itemCounts[s]--;
             }
         }
-        return itemCounts.Values.All(c => c == 0);
+        bool allCollected = itemCounts.Values.All(c => c == 0);
+        if (allCollected)
+        {
+            NotifyAllFlowersCollected();
+        }
+        return allCollected;
     }
 }

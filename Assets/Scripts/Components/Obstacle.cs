@@ -10,7 +10,8 @@ public class Obstacle : MonoBehaviour
     private GameManager gameManager;
     private AudioManager audioManager;
     private Collider2D beeCollider;
-    private bool hasPlayedSound = false;
+
+    //private bool hasPlayedSound = false;
 
     private void Awake()
     {
@@ -21,12 +22,9 @@ public class Obstacle : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Bee") && !hasPlayedSound)
+        if (other.CompareTag("Bee"))
         {
-            hasPlayedSound = true;
-
             gameManager.NotifyObstacleEntered();
-            audioManager.PlaySFX(AudioClipType.ObstacleHit);
 
             Debug.Log("Obstacle hit");
 
@@ -34,7 +32,7 @@ public class Obstacle : MonoBehaviour
 
             beeRigidbody.velocity = Vector2.zero;
             beeRigidbody.rotation = 0;
-            if(this.Type != ObstacleType.SMOKER)
+            if (this.Type != ObstacleType.SMOKER)
             {
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
@@ -56,6 +54,9 @@ public class Obstacle : MonoBehaviour
             case ObstacleType.FACTORY:
             case ObstacleType.SMOKER:
                 HandleSmokeObstacleInteraction(beeRigidbody);
+                break;
+            case ObstacleType.BOTTOM:
+                HandleBottomObstacleInteraction(beeRigidbody);
                 break;
         }
     }
@@ -88,6 +89,12 @@ public class Obstacle : MonoBehaviour
         {
             Debug.LogError("bee_body SpriteRenderer not found");
         }
+    }
+
+    private void HandleBottomObstacleInteraction(Rigidbody2D beeRigidbody)
+    {
+        Animator beeAnimator = beeRigidbody.GetComponent<Animator>();
+        beeAnimator.SetBool("isStuck", true);
     }
 
     private IEnumerator ChangeObstacleColorGradually(SpriteRenderer spriteRenderer, Color targetColor, float duration)

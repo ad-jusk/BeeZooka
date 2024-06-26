@@ -40,7 +40,6 @@ public class UiManager : Singleton<UiManager>
         audioManager = AudioManager.Instance;
 
         gameManager.OnFlowerEntered += HandleFlowerEntered;
-        gameManager.OnBeehiveMissed += HandleOnBeehiveMissed;
         gameManager.OnObstacleEntered += HandleObstacleEntered;
         gameManager.OnPauseButtonClicked += HandlePauseButtonClicked;
         gameManager.OnResumeButtonClicked += HandleResumeButtonClicked;
@@ -61,7 +60,7 @@ public class UiManager : Singleton<UiManager>
         }
         else
         {
-            if(tutorialCanvas != null)
+            if (tutorialCanvas != null)
             {
                 tutorialCanvas.SetActive(true);
             }
@@ -78,7 +77,6 @@ public class UiManager : Singleton<UiManager>
         WinMenuSound();
         StartCoroutine(CollectiblesCollected(score));
     }
-
 
     private void HandleFlowerEntered(FlowerColor flowerColor)
     {
@@ -114,17 +112,6 @@ public class UiManager : Singleton<UiManager>
         }
     }
 
-    private void HandleOnBeehiveMissed()
-    {
-        if (pauseMenu.activeSelf)
-        {
-            pauseMenu.SetActive(false);
-        }
-        lostMenu.SetActive(true);
-        audioManager.StopMusic();
-        PlaySFX(0);
-    }
-
     private void HandleObstacleEntered()
     {
         if (pauseMenu.activeSelf)
@@ -133,6 +120,11 @@ public class UiManager : Singleton<UiManager>
         }
         audioManager.StopMusic();
         PlaySFX(0);
+        GameObject pauseButton = GameObject.Find("Pause");
+        if (pauseButton != null)
+        {
+            pauseButton.SetActive(false);
+        }
         StartCoroutine(WaitForAnimationToFinish());
     }
 
@@ -158,10 +150,12 @@ public class UiManager : Singleton<UiManager>
     {
         audioManager.PlayMusic();
     }
+
     private void HandleSelectLevelButtonClicked()
     {
         audioManager.PlayMusic();
     }
+
     private void PlaySFX(int type)
     {
         if (audioManager != null)
@@ -198,7 +192,7 @@ public class UiManager : Singleton<UiManager>
 
         targetImage.fillAmount = 0f;
         toDoCanvas.SetActive(false);
-        if(tutorialCanvas != null) 
+        if (tutorialCanvas != null)
         {
             tutorialCanvas.SetActive(true);
         }
@@ -221,6 +215,7 @@ public class UiManager : Singleton<UiManager>
             collectibles.transform.Find("Collected" + i).GetComponent<Animation>().Play();
         }
     }
+
     private void WinMenuSound()
     {
         audioManager.ChangeMusicVolume(0.5f);
